@@ -1,0 +1,94 @@
+.portfolio {
+    align-items: center;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    position: relative;
+  }
+  
+  
+  
+  .portfolio .buttons {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 923px;
+    position: absolute;
+    top: 25px;
+    width: 69px;
+  }
+  
+  .portfolio .blog-link {
+    align-items: center;
+    align-self: stretch;
+    background-color: #000000;
+    border: 10px solid;
+    border-color: #a5a5a5;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 68px;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .portfolio .textbutton {
+    align-self: stretch;
+    color: #a5a5a5;
+    flex: 1;
+    font-family: "Inter", Helvetica;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 36.0px;
+    margin-top: -10.00px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .portfolio .github-link {
+    align-self: stretch;
+    height: 68px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .portfolio .email-link {
+    height: 68.03px;
+    position: relative;
+    width: 68.03px;
+  }
+  
+  .portfolio .mainmenu-button {
+    background-color: #000000;
+    border: 10px solid;
+    border-color: #a5a5a5;
+    border-radius: 100px;
+    height: 68px;
+    left: 0;
+    position: absolute;
+    top: 422px;
+    width: 68px;
+  }
+  
+  .portfolio .textbutton-2 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 30px;
+    font-weight: 400;
+    height: 30px;
+    left: 17px;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    top: 22px;
+    white-space: nowrap;
+    width: 30px;
+  }
+  
