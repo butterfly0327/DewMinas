@@ -1,94 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="./style.css" />
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="potpolio">
-        <div class="mainbar">
+    <div class="portfolio">
+        <div class="main-bar">
             <div class="logo"></div>
         </div>
 
-        <div class="mainwrapper">
-            <div class="maincontainer">
+        <div class="main-wrapper">
+            <div class="main-container">
                 <div class="heading">
-                    <h1 class="sectiontitle">Profile</h1>
+                    <h1 class="head-text">Profile</h1>
                 </div>
 
-                <div class="contentcontainer">
-                    <img class="profileimage" alt="Profile Image" src="image2.png" />
+                <div class="content-container">
+                    <img class="png" alt="Png" src="image2.png" />
 
-                    <div class="introframe">
-                        <p class="name">이원준 (WONJUN LEE)</p>
-                        <p class="role">Software Engineer</p>
-                        <p class="contactinfo">Phone: 01012345678</p>
-                        <p class="contactinfo">Email: evenil0206@gmail.com</p>
+                    <div class="intro-frame">
+                        <p class="name" name="full-name">이원준 (WONJUN LEE)</p>
+                        <p class="role" name="role">Software Engineer</p>
+                        <p class="contact-info" name="phone-number">Phone. 010-1234-5678</p>
+                        <p class="contact-info" name="email-address">e-mail. evenil0206@gmail.com</p>
                     </div>
                 </div>
 
-                <div class="contentcontainer">
-                    <h2 class="sectionsubtitle">Education</h2>
-                    <div class="contentframe">
-                        <p>동의대학교 / 컴퓨터공학과 / 학사</p>
-                        <p>GPA: 4.49 / 4.5</p>
+                <div class="content-container">
+                    <h2 class="text-wrapper-4">/ Education /</h2>
+                    <div class="content-frame">
+                        <p class="education-text" name="university-info">동의대학교 / 컴퓨터공학과 / 학사</p>
+                        <p class="gpa-text" name="gpa">GPA : 4.49 / 4.5</p>
                     </div>
                 </div>
 
-                <div class="contentcontainer">
-                    <h2 class="sectionsubtitle">License</h2>
-                    <div class="contentframe">
-                        <p>정보처리기사 / 한국산업인력공단  202406</p>
-                        <p>SQL개발자 / 한국데이터산업진흥원  202406</p>
+                <div class="content-container">
+                    <h2 class="text-wrapper-4">/ License /</h2>
+                    <div class="content-frame">
+                        <p class="license-name" name="license-1-name">정보처리기사 / 한국산업인력공단</p>
+                        <p class="license-date" name="license-1-date">2024-06</p>
+                    </div>
+                    <div class="content-frame">
+                        <p class="license-name" name="license-2-name">SQL개발자 / 한국데이터산업진흥원</p>
+                        <p class="license-date" name="license-2-date">2024-06</p>
                     </div>
                 </div>
 
-                <div class="contentcontainer">
-                    <h2 class="sectionsubtitle">Awards</h2>
-                    <div class="contentframe">
-                        <p>2024년 하계, 동계 계절학기 캡스톤 디자인 경진대회 장려상  동의대학교 LINC+ 사업단</p>
-                        <p>자율 비행 드론 아이디어 공모전 우수상  동의대학교 LINC+ 사업단</p>
-                        <p>아이디어 난장 대회 우수상  동의대학교 총장</p>
+                <div class="content-container">
+                    <h2 class="text-wrapper-4">/ Awards /</h2>
+                    <div class="content-frame">
+                        <p class="award-title" name="award-1-title">2024년 하계, 동계 계절학기 캡스톤 디자인 경진대회 장려상</p>
+                        <p class="award-organizer" name="award-1-organizer">동의대학교 LINC+ 사업단</p>
+                        <p class="award-date" name="award-1-date">2020-11</p>
+                    </div>
+                    <div class="content-frame">
+                        <p class="award-title" name="award-2-title">자율 비행 드론 아이디어 공모전 우수상</p>
+                        <p class="award-organizer" name="award-2-organizer">동의대학교 LINC+ 사업단</p>
+                        <p class="award-date" name="award-2-date">2021-01</p>
+                    </div>
+                    <div class="content-frame">
+                        <p class="award-title" name="award-3-title">아이디어 난장 대회 우수상</p>
+                        <p class="award-organizer" name="award-3-organizer">동의대학교 총장</p>
+                        <p class="award-date" name="award-3-date">2020-11</p>
                     </div>
                 </div>
 
-                <div class="contentcontainer">
-                    <h2 class="sectionsubtitle">Experience</h2>
-                    <div class="contentframe">
-                        <p>미래 내일 일 경험 프로그램 프로젝트형 수료  한국융합인재교육협회</p>
-                        <p>「XOR 연산 특징을 이용한 현대암호 알고리즘 설계 및 구현」 논문 투고  한국정보통신학회</p>
+                <div class="content-container">
+                    <h2 class="text-wrapper-4">/ Experience /</h2>
+                    <div class="content-frame">
+                        <p class="exp-title" name="experience-1-title">미래 내일 일 경험 프로그램 프로젝트형 수료</p>
+                        <p class="exp-organizer" name="experience-1-organizer">한국융합인재교육협회</p>
+                        <p class="exp-date" name="experience-1-date">2020-11</p>
+                    </div>
+                    <div class="content-frame">
+                        <p class="exp-title" name="experience-2-title">「XOR 연산 특징을 이용한 현대암호 알고리즘 설계 및 구현」 논문 투고</p>
+                        <p class="exp-organizer" name="experience-2-organizer">한국정보통신학회</p>
+                        <p class="exp-date" name="experience-2-date">2020-09</p>
                     </div>
                 </div>
 
-                <div class="contentcontainer">
-                    <h2 class="sectionsubtitle">Skills</h2>
-                    <div class="contentframe">
-                        <p>TensorFlow, PySerial 등의 라이브러리 운용 및 고급 기능 활용 (멀티 Thread, 네트워킹 등)</p>
+                <div class="content-container">
+                    <h2 class="text-wrapper-4">/ Skills /</h2>
+                    <div class="content-frame">
+                        <p class="skill-details" name="skills">TensorFlow, PySerial 등의 라이브러리 운용<br>멀티 Thread, 네트워킹 등 고급 기능 활용</p>
                     </div>
                 </div>
 
                 <div class="heading">
-                    <h1 class="sectiontitle">Projects</h1>
+                    <h1 class="head-text">Projects</h1>
                 </div>
 
-                <div class="projectcontainer">
-                    <img class="projectimage" alt="Project Image" src="projectimage2.png">
-                    <h3 class="projecttitle">Crosswalk</h3>
-                    <p class="projectdescription">운전자의 사각지대를 대신 관측해주는 모듈 개발.</p>
+                <div class="project-container">
+                    <img class="project-image" alt="Projectimage" src="projectimage2.png">
+                    <h3 class="project-title" name="project-1-title">Crosswalk</h3>
+                    <p class="project-description" name="project-1-description">운전자의 사각지대를 대신 관측해주는 모듈 개발. 보행자 진입 사실을 SSD-Mobilenet-v2를 사용해 인식, Jetson nano를 사용한 독립적인 AI 애플리케이션 디바이스 개발</p>
                 </div>
 
-                <div class="projectcontainer">
-                    <img class="projectimage" alt="Project Image" src="projectimage.png">
-                    <h3 class="projecttitle">Store Sales: Time Series Forecasting</h3>
-                    <p class="projectdescription">운전자의 사각지대를 대신 관측해주는 모듈 개발.</p>
+                <div class="project-container">
+                    <img class="project-image" alt="Projectimage" src="projectimage.png">
+                    <h3 class="project-title" name="project-2-title">Store Sales: Time Series Forecasting</h3>
+                    <p class="project-description" name="project-2-description">운전자의 사각지대를 대신 관측해주는 모듈 개발. 보행자 진입 사실을 SSD-Mobilenet-v2를 사용해 인식, Jetson nano를 사용한 독립적인 AI 애플리케이션 디바이스 개발</p>
                 </div>
             </div>
 
-            <div class="footerbuttons">
-                <button class="bloglink">Blog</button>
-                <img class="githublink" alt="GitHub Link" src="githubLink.png">
-                <img class="emaillink" alt="Email Link" src="emailLink.png">
+            <div class="footer-buttons">
+                <button class="blog-link" name="blog-link">Blog</button>
+                <img class="github-link" alt="Github link" src="githubLink.png" name="github-link">
+                <img class="email-link" alt="Email link" src="emailLink.png" name="email-link">
             </div>
         </div>
     </div>
