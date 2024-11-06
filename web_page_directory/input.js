@@ -2,180 +2,153 @@
 //button_ci=>container_introdce
 const frame = document.querySelector(".form");
 
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.toggle-button').forEach(button => {
+      const sectionName = button.getAttribute('data-section');
 
+      // 로컬 저장소에서 해당 섹션의 'hidden' 상태와 'activate' 상태를 확인하고 복원
+      const isHidden = localStorage.getItem(`section-${sectionName}-hidden`) === 'true';
+      const isActivated = localStorage.getItem(`button-${sectionName}-activate`) === 'true';
 
-const ceButton = document.getElementById("ce_button");
-const clButton = document.getElementById("cl_button");
-const crButton = document.getElementById("cr_button");
-const cxButton = document.getElementById("cx_button");
-const ccButton = document.getElementById("cc_button");
-const csButton = document.getElementById("cs_button");
+      // 초기 상태 설정: 섹션과 자식 요소들의 'hidden' 클래스를 설정
+      const section = document.querySelector(`[name="${sectionName}"]`);
+      if (section) {
+          if (isHidden) {
+              section.classList.add('hidden');
+              Array.from(section.children).forEach(child => child.classList.add('hidden'));
+          }
+      }
 
-ceButton.addEventListener("click", function () {
-  let educationDiv = document.querySelector(".form .education");
-  ceButton.classList.toggle("activate");
-  if (educationDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(educationDiv);
-  } else {
-    // 요소가 없으면 추가
-    educationDiv = document.createElement("form");
-    educationDiv.classList.add("education");
-    educationDiv.innerHTML = `
-<div class="maincontainer">
-  <div class="heading">
-  <div class="heading-2">학력</div>
-  <div class="container-9">
-    <div class="label-12">
-      <img class="image-14" src="img/image-30.png" />
-      <div class="text-wrapper-18">고등학교 미만 졸업</div>
-    </div>
-  </div>
-  </div>
+      // 버튼의 'activate' 상태 복원
+      if (isActivated) {
+          button.classList.add("activate");
+      }
 
-<div class="mainframe">
-  <div class="container-8">
-    <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
-    <div class="background-border-22">
-      <div class="label-6">
-        <p class="div-4"><span class="span">학교명 </span> <span class="text-wrapper-5">*</span></p>
-      </div>
-    </div>
-    <div class="overlap-group-4">
-      <img class="image-13" src="img/image-28.png" />
-      <div class="paragraph-wrapper">
-        <div class="paragraph">
-          <div class="text-wrapper-16">학교구분</div>
-          <div class="text-wrapper-17">*</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<button class="plusbutton">
-  <img class="image-6" src="img/image-26.png" />
-  <div class="text-wrapper-7">추가</div>
-</button>
+      button.addEventListener('click', () => {
+          // 버튼 클릭 시 'activate' 클래스를 토글
+          const isNowActivated = button.classList.toggle("activate");
 
-      `;
+          // 버튼의 'activate' 상태를 로컬 저장소에 저장
+          localStorage.setItem(`button-${sectionName}-activate`, isNowActivated);
 
-    frame.appendChild(educationDiv);
-  }
+          // 버튼 클릭 시 해당 섹션을 찾고 'hidden' 클래스를 토글
+          if (section) {
+              const isNowHidden = section.classList.toggle('hidden');
+              
+              // 자식 요소들에 'hidden' 클래스도 토글
+              Array.from(section.children).forEach(child => {
+                  child.classList.toggle('hidden', isNowHidden);
+              });
+
+              // plusbutton도 섹션 내 자식 요소로 취급하여 'hidden' 클래스를 토글
+              const plusButton = section.querySelector('.plusbutton');
+              if (plusButton) {
+                  plusButton.classList.toggle('hidden', isNowHidden);
+              }
+
+              // 섹션의 'hidden' 상태를 로컬 저장소에 저장
+              localStorage.setItem(`section-${sectionName}-hidden`, isNowHidden);
+          }
+      });
+  });
 });
 
 
-clButton.addEventListener("click", function () {
-  let lisenceDiv = document.querySelector(".form .lisence");//
-  clButton.classList.toggle("activate");
-  if (lisenceDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(lisenceDiv);
-  } else {
-    lisenceDiv = document.createElement("form");
-    lisenceDiv.classList.add("lisence");
-    lisenceDiv.innerHTML = `
-      <div class="maincontainer">
-        <div class="heading">
-          <div class="heading-2">자격증</div>
-        </div>
-        <div class="mainframe">
-          <div class="container-2">
-            <div class="background-border-18">
-              <img class="image-12" src="img/image-24.png" />
-              <div class="label-11">
-                <p class="div-6"><span class="span">자격증 명 </span> <span class="text-wrapper-5">*</span></p>
-              </div>
-            </div>
-            <div class="background-border-19">
-              <div class="label-2">발행처</div>
-            </div>
-            <div class="background-border-20">
-              <div class="input">
-                <div class="container-3">
-                  <div class="text-wrapper-6">2017.10</div>
-                </div>
-              </div>
-              <div class="label-2">취득월</div>
-            </div>
-            <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
-          </div>
-        </div>
-<button class="plusbutton">
-  <img class="image-6" src="img/image-26.png" />
-  <div class="text-wrapper-7">추가</div>
-</button>
-      </div>`
 
+///////////////////////////////////////////////plusbutton
+document.addEventListener('DOMContentLoaded', function() {
+  // 초기 로드 시 각 섹션별로 저장된 추가 필드를 로드
+  document.querySelectorAll('.plusbutton').forEach(button => {
+    const section = button.getAttribute('data-section');
+    const savedFieldCount = parseInt(localStorage.getItem(`fieldCount-${section}`)) || 0;
 
-    frame.appendChild(lisenceDiv);
-  }
+    // 저장된 필드셋 수만큼 추가
+    for (let i = 0; i < savedFieldCount; i++) {
+      addFieldSet(section, button);
+    }
+  });
 });
 
+document.querySelectorAll('.plusbutton').forEach(button => {
+  button.addEventListener('click', (e) => {
+      const section = e.currentTarget.getAttribute('data-section');
+      addFieldSet(section, e.currentTarget);  // plusbutton을 인자로 넘겨줌
 
-crButton.addEventListener("click", function () {
-  let educationDiv = document.querySelector(".form .reward");//
-  crButton.classList.toggle("activate");
-  if (educationDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(educationDiv);
-  } else {
-    rewardDiv = document.createElement("form");
-    rewardDiv.classList.add("reward");
-    rewardDiv.innerHTML = `
-        
-        
-        
-        
-        `
-
-
-
-    frame.appendChild(educationDiv);
-  }
+      // 필드셋 추가 후 필드 수 저장
+      const fieldCountKey = `fieldCount-${section}`;
+      const currentCount = parseInt(localStorage.getItem(fieldCountKey)) || 0;
+      localStorage.setItem(fieldCountKey, currentCount + 1);
+  });
 });
 
+function addFieldSet(section, plusButton) {
+  let template, container;
 
-cxButton.addEventListener("click", function () {
-  let educationDiv = document.querySelector(".form .education");//
-  cxButton.classList.toggle("activate");
-  if (educationDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(educationDiv);
-  } else {
-
-
-
-    frame.appendChild(educationDiv);
+  switch (section) {
+      case 'skill':
+          template = document.querySelector('.maincontainer[name="skill"] .contentframe');
+          container = document.querySelector('.maincontainer[name="skill"] .mainframe');
+          break;
+      case 'career':
+          template = document.querySelector('.maincontainer[name="career"] .container-4');
+          container = document.querySelector('.maincontainer[name="career"] .mainframe');
+          break;
+      case 'experience':
+          template = document.querySelector('.maincontainer[name="experience"] .container-6');
+          container = document.querySelector('.maincontainer[name="experience"] .mainframe');
+          break;
+      case 'reward':
+          template = document.querySelector('.maincontainer[name="reward"] .container-7');
+          container = document.querySelector('.maincontainer[name="reward"] .mainframe');
+          break;
+      case 'education':
+          template = document.querySelector('.maincontainer[name="education"] .container-8');
+          container = document.querySelector('.maincontainer[name="education"] .mainframe');
+          break;
+      case 'lisence':
+          template = document.querySelector('.maincontainer[name="lisence"] .container-2');
+          container = document.querySelector('.maincontainer[name="lisence"] .mainframe');
+          break;
+      default:
+          console.warn(`Unknown section: ${section}`);
+          return;
   }
+
+  // 필드셋 복제 및 초기화
+  const newFieldSet = template.cloneNode(true);
+  newFieldSet.querySelectorAll('input, textarea').forEach(input => input.value = '');
+  container.appendChild(newFieldSet);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const previewButton = document.querySelector('#preview'); // 미리보기 버튼
+
+  previewButton.addEventListener('click', function() {
+    const allData = {};
+
+    // 모든 입력 값 수집, hidden 클래스가 없는 요소만
+    document.querySelectorAll('.text_area, .text_area_1').forEach(input => {
+      if (!input.closest('.hidden')) { // input 요소가 hidden 클래스를 포함한 부모 요소 내에 있는지 확인
+        const name = input.getAttribute('name');
+        if (!allData[name]) allData[name] = []; // 배열 형태로 초기화하여 여러 입력을 수집
+        allData[name].push(input.value);
+      }
+    });
+
+    // 데이터를 JSON 문자열로 변환하여 localStorage에 저장
+    localStorage.setItem('formData', JSON.stringify(allData));
+
+    // 미리보기 페이지로 이동
+    window.location.href = './portfolio_preview.html';
+  });
 });
 
-
-ccButton.addEventListener("click", function () {
-  let educationDiv = document.querySelector(".form .education");//
-  ccButton.classList.toggle("activate");
-  if (educationDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(educationDiv);
-  } else {
-
-
-
-    frame.appendChild(educationDiv);
-  }
-});
-
-
-csButton.addEventListener("click", function () {
-  let skillDiv = document.querySelector(".form .skill");//
-  csButton.classList.toggle("activate");
-  if (skillDiv) {
-    // 이미 요소가 존재하면 제거
-    frame.removeChild(skillDiv);
-  } else {
-
-
-
-    frame.appendChild(skillDiv);
-  }
+document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('click', function() {
+    // 클릭된 이미지-wrapper의 부모 요소를 찾고, 그 부모 요소를 제거
+    const parentElement = wrapper.parentElement;
+    if (parentElement) {
+      parentElement.remove(); // 부모 요소를 제거
+    }
+  });
 });
