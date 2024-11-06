@@ -23,8 +23,8 @@ public class ResumeApiController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/api/resume")
-    public ResponseEntity updateResume(@RequestBody RegisterResumeRequest request) {
+    @PutMapping("/api/resume/{id}")
+    public ResponseEntity updateResume(@PathVariable(name = "id") Long id, @RequestBody RegisterResumeRequest request) {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

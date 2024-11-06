@@ -17,7 +17,7 @@ public class Education extends CommonDateField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private Long id;
 
     @Column(name = "type", nullable = false)
     private Short type;

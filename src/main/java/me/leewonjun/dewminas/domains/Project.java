@@ -39,7 +39,7 @@ public class Project extends CommonDateField {
     @OneToMany(mappedBy = "project")
     private ArrayList<ProjectPhoto> photos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "id.project")
     private ArrayList<Skill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
@@ -48,10 +48,10 @@ public class Project extends CommonDateField {
     @OneToMany(mappedBy = "project")
     private ArrayList<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "id.project")
     private ArrayList<RepositoryLink> repositoryLinks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "id.project")
     private ArrayList<ProjectSource> projectSources = new ArrayList<>();
 
     @Builder
