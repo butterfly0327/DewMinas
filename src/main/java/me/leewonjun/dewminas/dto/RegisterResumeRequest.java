@@ -8,9 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RegisterResumeRequest {
     // 클라이언트로부터 데이터.
-    // 1. 사용자 정보 - owner 아이디, 핸드폰 번호
-    // 2.
-
+    // 1. 사용자 이메일
+    private String email;
+    private String phoneNumber;
 }

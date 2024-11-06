@@ -28,7 +28,7 @@ public class Project extends CommonDateField {
     @Column(nullable = false)
     private String summary;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="resume_id")
     private Resume resume;
 

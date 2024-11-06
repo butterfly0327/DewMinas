@@ -2,6 +2,7 @@ package me.leewonjun.dewminas.domains;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 //import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +19,11 @@ public class User
 //        implements UserDetails
 {
     @Id
-    @Column(name = "email")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "nickname")
@@ -46,9 +51,9 @@ public class User
 //    }
 //
 //    @Override
-//    public String getUsername() {
-//        return this.email;
-//    }
+    public String getUsername() {
+        return this.email;
+    }
 //
 //    @Override
 //    public boolean isAccountNonExpired() {
