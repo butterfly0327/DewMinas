@@ -2,6 +2,7 @@ package me.leewonjun.dewminas.repositories;
 
 import lombok.RequiredArgsConstructor;
 import me.leewonjun.dewminas.domains.Resume;
+import me.leewonjun.dewminas.domains.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface ResumeRepository extends JpaRepository<Resume, Long> {
-    public abstract Optional<Resume> findByOwner(String owner);
+    public abstract Optional<Resume> findByOwner(User owner);
 }

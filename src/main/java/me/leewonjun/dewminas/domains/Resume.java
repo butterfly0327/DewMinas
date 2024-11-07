@@ -52,20 +52,20 @@ public class Resume {
     }
 
     @OneToMany(mappedBy = "resume")
-    private ArrayList<Education> educations = new ArrayList<>();
+    private List<Education> educations = new ArrayList<>();
 
     @OneToMany(mappedBy = "resume")
-    private ArrayList<Award> awards = new ArrayList<>();
+    private List<Award> awards = new ArrayList<>();
 
     @OneToMany(mappedBy = "resume")
-    private ArrayList<EducationalExp> eduExps = new ArrayList<>();
+    private List<EducationalExp> eduExps = new ArrayList<>();
 
     @OneToMany(mappedBy = "resume")
-    private ArrayList<AcademicActivity> academicActivities = new ArrayList<>();
+    private List<AcademicActivity> academicActivities = new ArrayList<>();
 
     @OneToMany(mappedBy = "resume")
-    private ArrayList<WorkExp> workExps = new ArrayList<>();
+    private List<WorkExp> workExps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume_id")
-    private ArrayList<Project> projects = new ArrayList<>();
+    @OneToMany(mappedBy = "resume")
+    private List<Project> projects = new ArrayList<>();
 }

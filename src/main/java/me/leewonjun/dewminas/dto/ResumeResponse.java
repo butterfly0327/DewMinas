@@ -6,6 +6,7 @@ import me.leewonjun.dewminas.domains.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -21,11 +22,11 @@ public class ResumeResponse {
     private String profilePhotoUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private ArrayList<Education> educationList;
-    private ArrayList<Award> awardList;
-    private ArrayList<EducationalExp> eduExpList;
-    private ArrayList<AcademicActivity> acaActList;
-    private ArrayList<WorkExp> workExpList;
+    private List<Education> educationList;
+    private List<Award> awardList;
+    private List<EducationalExp> eduExpList;
+    private List<AcademicActivity> acaActList;
+    private List<WorkExp> workExpList;
 
     private ProjectSummary[] summaries;
 
@@ -44,7 +45,7 @@ public class ResumeResponse {
         this.acaActList = (resume.getAcademicActivities() != null ? resume.getAcademicActivities() : null);
         this.workExpList = (resume.getWorkExps() != null ? resume.getWorkExps() : null);
 
-        ArrayList<Project> projects = resume.getProjects();
+        List<Project> projects = resume.getProjects();
         if(projects != null) {
             this.summaries = new ProjectSummary[projects.size()];
             for(int i = 0; i < summaries.length; i++) this.summaries[i] = new ProjectSummary(projects.get(i));

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.leewonjun.dewminas.domains.Resume;
 import me.leewonjun.dewminas.dto.RegisterResumeRequest;
 import me.leewonjun.dewminas.dto.ResumeResponse;
+import me.leewonjun.dewminas.dto.UpdateResumeRequest;
 import me.leewonjun.dewminas.services.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

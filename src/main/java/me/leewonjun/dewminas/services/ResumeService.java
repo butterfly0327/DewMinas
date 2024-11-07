@@ -1,5 +1,6 @@
 package me.leewonjun.dewminas.services;
 
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import me.leewonjun.dewminas.domains.Resume;
 import me.leewonjun.dewminas.domains.User;
@@ -19,7 +20,8 @@ public class ResumeService {
     @Autowired
     private final UserRepository userRepository;
 
-    public Resume findResume(String owner) {
+    public Resume findResume(String email) {
+        User owner = userRepository.findByEmail(email).orElseThrow(()->new IllegalArgumentException("No such email exists"));
         return resumeRepository.findByOwner(owner).orElseThrow(()->new IllegalArgumentException("No such owner exists"));
     }
 

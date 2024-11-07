@@ -8,6 +8,7 @@ import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,22 +38,22 @@ public class Project extends CommonDateField {
     private ProjectPhoto repImage;
 
     @OneToMany(mappedBy = "project")
-    private ArrayList<ProjectPhoto> photos = new ArrayList<>();
+    private List<ProjectPhoto> photos = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.project")
-    private ArrayList<Skill> skills = new ArrayList<>();
+    private List<Skill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
-    private ArrayList<Troubleshooting> troubleshootings = new ArrayList<>();
+    private List<Troubleshooting> troubleshootings = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
-    private ArrayList<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.project")
-    private ArrayList<RepositoryLink> repositoryLinks = new ArrayList<>();
+    private List<RepositoryLink> repositoryLinks = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.project")
-    private ArrayList<ProjectSource> projectSources = new ArrayList<>();
+    private List<ProjectSource> projectSources = new ArrayList<>();
 
     @Builder
     public Project(String title, String shortComment, String summary, Resume resume) {
