@@ -68,4 +68,8 @@ public class Resume {
 
     @OneToMany(mappedBy = "resume")
     private List<Project> projects = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
+    private List<License> licenses = new ArrayList<>();
+
 }

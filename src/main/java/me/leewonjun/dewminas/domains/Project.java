@@ -33,26 +33,26 @@ public class Project extends CommonDateField {
     @JoinColumn(name="resume_id")
     private Resume resume;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="rep_img")
     private ProjectPhoto repImage;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<ProjectPhoto> photos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.project")
+    @OneToMany(mappedBy = "id.project", fetch = FetchType.LAZY)
     private List<Skill> skills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Troubleshooting> troubleshootings = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.project")
+    @OneToMany(mappedBy = "id.project", fetch = FetchType.LAZY)
     private List<RepositoryLink> repositoryLinks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.project")
+    @OneToMany(mappedBy = "id.project", fetch = FetchType.LAZY)
     private List<ProjectSource> projectSources = new ArrayList<>();
 
     @Builder
