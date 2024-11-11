@@ -8,6 +8,7 @@ import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -33,8 +34,8 @@ public class EducationalExp extends CommonDateField {
     private Resume resume;
 
     @Builder
-    public EducationalExp(String educationName, String organizationName, LocalDate fromDate,
-                          LocalDate toDate, Boolean toNow, Resume resume) {
+    public EducationalExp(String educationName, String organizationName, LocalDateTime fromDate,
+                          LocalDateTime toDate, Boolean toNow, Resume resume) {
         this.educationName = educationName;
         this.organizationName = organizationName;
         this.fromDate = fromDate;

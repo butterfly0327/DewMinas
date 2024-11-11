@@ -3,10 +3,12 @@ package me.leewonjun.dewminas.dto;
 import lombok.Getter;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.*;
+import me.leewonjun.dewminas.dto.resume_summaries.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -22,13 +24,13 @@ public class ResumeResponse {
     private String profilePhotoUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<Education> educationList;
-    private List<Award> awardList;
-    private List<EducationalExp> eduExpList;
-    private List<AcademicActivity> acaActList;
-    private List<WorkExp> workExpList;
+    private List<EducationSummary> educationList;
+    private List<AwardSummary> awardList;
+    private List<EducationalExpSummary> eduExpList;
+    private List<AcademicActivitySummary> acaActList;
+    private List<WorkExpSummary> workExpList;
 
-    private ProjectSummary[] summaries;
+    private List<ProjectSummary> projects;
 
     public ResumeResponse(Resume resume) {
         this.resumeId = resume.getId();
@@ -39,18 +41,13 @@ public class ResumeResponse {
         this.updatedAt = resume.getUpdatedAt();
 
         this.profilePhotoUrl = (resume.getResumePhoto() != null ? resume.getResumePhoto().getUrl() : null);
-        this.educationList = (resume.getEducations() != null ? resume.getEducations() : null);
-        this.awardList = (resume.getAwards() != null ? resume.getAwards() : null);
-        this.eduExpList = (resume.getEduExps() != null ? resume.getEduExps() : null);
-        this.acaActList = (resume.getAcademicActivities() != null ? resume.getAcademicActivities() : null);
-        this.workExpList = (resume.getWorkExps() != null ? resume.getWorkExps() : null);
+        this.educationList = (resume.getEducations() != null ? resume.getEducations().stream().map(EducationSummary::new).collect(Collectors.toList()) : null);
+        this.awardList = (resume.getAwards() != null ? resume.getAwards().stream().map(AwardSummary::new).collect(Collectors.toList()) : null);
+        this.eduExpList = (resume.getEduExps() != null ? resume.getEduExps().stream().map(EducationalExpSummary::new).collect(Collectors.toList()) : null);
+        this.acaActList = (resume.getAcademicActivities() != null ? resume.getAcademicActivities().stream().map(AcademicActivitySummary::new).collect(Collectors.toList()) : null);
+        this.workExpList = (resume.getWorkExps() != null ? resume.getWorkExps().stream().map(WorkExpSummary::new).collect(Collectors.toList()) : null);
 
-        List<Project> projects = resume.getProjects();
-        if(projects != null) {
-            this.summaries = new ProjectSummary[projects.size()];
-            for(int i = 0; i < summaries.length; i++) this.summaries[i] = new ProjectSummary(projects.get(i));
-        }
-
+        this.projects = (resume.getProjects() != null) ? (resume.getProjects().stream().map(ProjectSummary::new).collect(Collectors.toList())) : null;
     }
 
 

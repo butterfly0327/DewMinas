@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,22 +24,22 @@ public class Award {
     @Column(name="competition_name", nullable = false)
     private String competitionName;
 
-    @Column(name = "Organization_name", nullable = false)
+    @Column(name = "organization_name", nullable = false)
     private String organizationName;
 
     @Column(name= "award_date", nullable = false)
-    private LocalDate award_date;
+    private LocalDateTime awardedDate;
 
     @ManyToOne
     @JoinColumn(name="resume_id", nullable = false)
     private Resume resume;
 
     @Builder
-    public Award(String awardName, String competitionName, String organizationName, LocalDate award_date, Resume resume) {
+    public Award(String awardName, String competitionName, String organizationName, LocalDateTime awardedDate, Resume resume) {
         this.awardName = awardName;
         this.competitionName = competitionName;
         this.organizationName = organizationName;
-        this.award_date = award_date;
+        this.awardedDate = awardedDate;
         this.resume = resume;
     }
 }

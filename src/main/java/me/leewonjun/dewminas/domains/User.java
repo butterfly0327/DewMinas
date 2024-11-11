@@ -23,6 +23,12 @@ public class User
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name_kor", nullable = false)
+    private String nameKor;
+
+    @Column(name = "name_eng", nullable = false)
+    private String nameEng;
+
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -34,7 +40,9 @@ public class User
 
 
     @Builder
-    public User(String nickname, String email, String password) {
+    public User(String nameKor, String nameEng, String nickname, String email, String password) {
+        this.nameKor = nameKor;
+        this.nameEng = nameEng;
         this.nickname = nickname;
         this.password = password;
         this.email = email;

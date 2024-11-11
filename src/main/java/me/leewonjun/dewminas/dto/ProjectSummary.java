@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.Project;
+import me.leewonjun.dewminas.domains.Skill;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 프로젝트 요약정보 : 이력서 페이지에 출력
@@ -20,7 +23,7 @@ public class ProjectSummary {
     private String title;
     private String shortComment;
     private String rep_photo_url;
-    private String[] token_url;
+    private List<String> token_url;
 
     public ProjectSummary(Project original) {
         this.title = original.getTitle();
@@ -28,8 +31,8 @@ public class ProjectSummary {
         this.rep_photo_url = original.getRepImage() != null ? original.getRepImage().getUrl() : null;
 
         if(original.getSkills() == null) return;
-        this.token_url = new String[original.getSkills().size()];
-        Arrays.setAll(token_url, (idx)-> original.getSkills().get(idx).getId().getSkillBook().getImageUrl());
+        this.token_url = new ArrayList<>();
+        for(Skill skill : original.getSkills()) token_url.add(skill.getId().getSkillBook().getImageUrl());
 
     }
 

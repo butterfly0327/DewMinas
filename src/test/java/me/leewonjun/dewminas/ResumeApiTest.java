@@ -60,7 +60,7 @@ public class ResumeApiTest {
     @Test
     public void postingTest() throws Exception{
         // given : 유저 데이터 저장, 이력서 정보 post
-        User newUser = userRepository.save(User.builder().email("mail@gmail.com").nickname("tester").password("1234").build());
+        User newUser = userRepository.save(User.builder().nameKor("이원준").nameEng("Lee WonJun").email("mail@gmail.com").nickname("tester").password("1234").build());
         String url = src;
         String pnum = "01012341111";
         // 전송할 이력서 기본 정보
@@ -87,7 +87,7 @@ public class ResumeApiTest {
     @Test
     public void findingTest() throws Exception{
         // given
-        User newUser = userRepository.save(User.builder().email("mail@gmail.com").nickname("tester").password("1234").build());
+        User newUser = userRepository.save(User.builder().nameKor("이원준").nameEng("Lee WonJun").email("mail@gmail.com").nickname("tester").password("1234").build());
         String pnum = "01012341111";
         Resume newResume = resumeRepository.save(Resume.builder().owner(newUser).phoneNumber(pnum).build());
         String url = src+"/{email}";

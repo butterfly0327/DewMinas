@@ -8,6 +8,7 @@ import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -20,13 +21,13 @@ public class Education extends CommonDateField {
     private Long id;
 
     @Column(name = "type", nullable = false)
-    private Short type;
+    private Short type; // 교육기관 타입 : 고교, 대학 = GPA 출력 여부 결정
 
     @Column(name="institution_name", nullable = false)
     private String institutionName;
 
     @Column(name="department_name", nullable = false)
-    private String departmentName;
+    private String major;
 
     @Column(name = "degree")
     private String degree;
@@ -37,6 +38,9 @@ public class Education extends CommonDateField {
     @Column(name="max_gpa")
     private Double maxGpa;
 
+    @Column(name="status")
+    private Short status; // 학적 - 중퇴 = 0, 재학 = 1, 휴학 = 2, 졸업 = 3, 졸업 예정 = 4;
+
     @Column(name = "to_now", nullable = false)
     private Boolean toNow;
 
@@ -45,11 +49,12 @@ public class Education extends CommonDateField {
     private Resume resume;
 
     @Builder
-    public Education(Short type, String institutionName, String departmentName, String degree, Double gpa,
-                     Double maxGpa, LocalDate fromDate, LocalDate toDate, Boolean toNow, Resume resume) {
+    public Education(Short type, String institutionName, String major, String degree, Double gpa, Short status,
+                     Double maxGpa, LocalDateTime fromDate, LocalDateTime toDate, Boolean toNow, Resume resume) {
         this.type = type;
+        this.status = status;
         this.institutionName = institutionName;
-        this.departmentName = departmentName;
+        this.major = major;
         this.degree = degree;
         this.gpa = gpa;
         this.maxGpa = maxGpa;

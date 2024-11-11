@@ -1,2 +1,2 @@
 -- 테스트용 user
-INSERT INTO USERS(email, nickname, password) values('mail@gmail.com', 'moeLee', '1234');
+INSERT INTO USERS(name_kor, name_eng, email, nickname, password) values('이원준', 'LEE WONJUN', 'mail@gmail.com', 'moeLee', '1234');

@@ -22,7 +22,7 @@ public class License {
     private String name;
 
     @Column(name = "organization_name", nullable = false)
-    private String issuing_organization;
+    private String organizationName;
 
     @Column(name = "issuedDate", nullable = false)
     private LocalDateTime issuedAt;
@@ -34,7 +34,7 @@ public class License {
     @Builder
     public License(String name, String organization, LocalDateTime issuedAt) {
         this.name = name;
-        this.issuing_organization = organization;
+        this.organizationName = organization;
         this.issuedAt = issuedAt;
     }
 }
