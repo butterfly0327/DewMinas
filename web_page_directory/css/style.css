@@ -37,6 +37,12 @@
 
   gap: 20px; /* 내부 요소 사이에 20px 간격 */
 }
+.container_heading{
+  position: relative;
+  width: 100%;
+  height: 20px;
+
+}
 .heading{
   position: relative;
   width: 940px;
@@ -93,22 +99,29 @@
   position: relative;
   width: 940px;
   height: auto;
-  display: flex;
-  flex-direction: column;
+  min-height: 100px;
+  display: none;
+  flex-direction: row;
   background-color: #ffffff;
   border-bottom: 0.5px solid;
   border-color: #eeeeee;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+  padding: 15px 30px;
+  align-self: stretch;
+  flex-wrap: wrap;
 }
 
 
 .potopolio-input-page .contentframe {
   position: relative;
-  width: 940px;
+  width: 920px;
   height: 90px;
   display: flex;
   flex-direction: row;
   gap: 10px;
-  padding: 15px 48px 15px 19px;
+  padding: 15px 10px;
   position: relative;
   background-color: #ffffff;
   
@@ -136,7 +149,7 @@
   top: 40px; /* top에 px 단위를 추가 */
   left: 1400px; /* left에도 px 단위를 추가 */
   width: 240px;
-  height: 518px;
+  height: 408px;
   background-color: white;
   } 
 
@@ -197,9 +210,62 @@
     font-weight: 400; /* 안내 텍스트는 얇게 */
     opacity: 0.5;
   }
+  .text_area[type="date"] {
+    /* 기본 스타일 */
+    width: 135px; /* 원하는 너비 */
+    padding: 8px; /* 내부 여백 */
+    font-size: 16px; /* 글꼴 크기 */
+    color: #333; /* 텍스트 색상 */
+    font-size: 15px;
+    /* 날짜 선택 아이콘을 제거하고 싶을 때 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    /* 커스텀 아이콘을 추가하고 싶다면 여기에 배경 이미지를 설정할 수 있습니다 */
+    background-position: right 0px center; /* 아이콘 위치 */
+    background-repeat: no-repeat; /* 아이콘 반복 설정 */
+  }
+  .text_area[type="month"] {
+    /* 기본 스타일 */
+    width: 125px; /* 원하는 너비 */
+    padding: 8px; /* 내부 여백 */
+    font-size: 15px; /* 글꼴 크기 */
+    color: #333; /* 텍스트 색상 */
+    left: -5px;
+    /* 날짜 선택 아이콘을 제거하고 싶을 때 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 15px;
+    /* 커스텀 아이콘을 추가하고 싶다면 여기에 배경 이미지를 설정할 수 있습니다 */
+    background-position: right -10px center; /* 아이콘 위치 */
+    background-repeat: no-repeat; /* 아이콘 반복 설정 */
+  }
+  
+  .select {
+    /* 기본 스타일 */
+    top:20px;
+    left: 0px;
+    width: 100%; /* 너비 */
+    padding: 8px; /* 패딩 */
+    font-size: 16px; /* 글꼴 크기 */
+    border: 0px solid #ccc; /* 테두리 */
+    position: absolute;
+    
+    color: #333; /* 글자 색상 */
+  
+    /* 커스텀 아이콘 */
+    background-image: url('custom-dropdown-icon.png'); /* 커스텀 아이콘 이미지 */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* 아이콘 위치 */
+    background-size: 15px; /* 아이콘 크기 */
+  }
+  
+  
   .potopolio-input-page .e_frame{
     position: relative;
-    width: 230px;
+    width: 200px;
   height: 62px;
   background-color: #ffffff;
   border: 1px solid;
@@ -208,13 +274,115 @@
   }
   .potopolio-input-page .e_frame_gpa{
     position: relative;
-    width: 150px;
+    width: 100px;
+  height: 62px;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dddddd;
+  }
+.potopolio-input-page .e_checkbox{
+  display: flex;
+  position: relative;
+width: 200px;
+padding: 18px 5px;
+flex-direction: row;
+align-items: flex-start;
+gap: 10px;
+}
+.e_checklist{
+  color: #999;
+ position: relative;
+ width: 200px;
+ top: 20px;
+left: 10px;
+font-size: 15.375px;
+font-style: normal;
+font-weight: var(--font-weight-400, 400);
+line-height: var(--line-height-24, 24px); /* 156.098% */
+}
+.e_check{
+position: relative;
+top: 22px;
+left: 10px;
+}
+.check{
+  position: relative;
+  left:0px;
+  top: 10px;
+  }
+  
+.c_frame{
+  position: relative;
+  width: 300px;
+height: 62px;
+background-color: #ffffff;
+border: 1px solid;
+border-color: #dddddd;
+}
+
+.c_frame_1{
+  position: relative;
+  width: 200px;
+height: 62px;
+}
+
+
+.c_frame_2{
+  position: relative;
+  width: 100%;
+height: 62px;
+background-color: #ffffff;
+border: 1px solid;
+border-color: #dddddd;
+}
+
+.r_frame{
+  position: relative;
+  width: 200px;
+height: 62px;
+background-color: #ffffff;
+border: 1px solid;
+border-color: #dddddd;
+
+}
+
+.l_frame_1{
+  position: relative;
+  width: 400px;
   height: 62px;
   background-color: #ffffff;
   border: 1px solid;
   border-color: #dddddd;
 
-  }
+}
+
+.l_frame_2{
+  position: relative;
+  width: 200px;
+  height: 62px;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dddddd;
+
+}.date{
+  position: relative;
+  width: 200px;
+  height: 62px;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dddddd;
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 .potopolio-input-page .background-border {
@@ -224,9 +392,7 @@
   height: 51px;
   align-items: center;
   padding: 1px 94.08px 0px 94.06px;
-  position: absolute;
-  top: 403px;
-  left: 0;
+  position: relative;
   background-color: #ffffff;
   border-top-width: 1px;
   border-top-style: solid;
@@ -264,9 +430,7 @@
   height: 52px;
   align-items: center;
   padding: 0px 85.44px 0px 85.42px;
-  position: absolute;
-  top: 466px;
-  left: 0;
+  position: relative;
   background-color: #002aff;
 }
 
@@ -297,7 +461,7 @@
   align-items: flex-start;
   gap: 11.5px;
   padding: 16.5px 15px 1px;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   background-color: #ffffff;
@@ -566,7 +730,7 @@
 }
 
 .potopolio-input-page .container-2 {
-  display: flex;
+  display: none;
   max-width: 1536px;
   align-items: flex-start;
   gap: 10px;
@@ -654,7 +818,7 @@
 
 .potopolio-input-page .background-border-5 {
   display: flex;
-  width: 662px;
+  width: 632px;
   height: 60px;
   align-items: flex-start;
   justify-content: center;
@@ -768,17 +932,56 @@
 
 .potopolio-input-page .border {
   display: flex;
-  width: 898px;
-  height: 135px;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 29px 1px 1px 2px;
-  top: 164px;
-  left: 20px;
-  position: absolute;
-  border: 1px solid;
-  border-color: #dddddd;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+  padding: 1px;
+  position: relative;
+  height: 800px;
+  overflow:auto;
 }
+
+.potopolio-input-page .image-container {
+  width: 100%;
+  height: 500px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 1px solid #eeeeee;
+  margin-bottom: 1px;
+}
+
+.potopolio-input-page .add-image-btn {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 2px 4px;
+  font-size: 10px;
+  background-color: #e0e0e0;
+  color: black;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  width: 80%;
+  display: block;
+  margin-left: 0;
+}
+
+.potopolio-input-page .add-image-btn:hover {
+  background-color: #c7c7c7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .potopolio-input-page .textarea {
   max-height: 500px;
@@ -1019,7 +1222,7 @@
 
 .potopolio-input-page .background-border-9 {
   display: flex;
-  width: 115px;
+  width: 125px;
   height: 62px;
   justify-content: center;
   padding: 1px;
@@ -1070,7 +1273,7 @@
 
 .potopolio-input-page .background-border-10 {
   display: flex;
-  width: 115px;
+  width: 125px;
   height: 62px;
   justify-content: center;
   padding: 1px;
@@ -1357,6 +1560,7 @@
   max-width: 1536px;
   width: 100%;
   height: 111px;
+  display: none;
 }
 
 .potopolio-input-page .background-border-15 {
@@ -1383,7 +1587,7 @@
 
 .potopolio-input-page .background-border-17 {
   display: flex;
-  width: 115px;
+  width: 135px;
   height: 62px;
   justify-content: center;
   padding: 1px;
@@ -1393,19 +1597,6 @@
   background-color: #ffffff;
   border: 1px solid;
   border-color: #dddddd;
-}
-
-.potopolio-input-page .text-wrapper-15 {
-  position: relative;
-  align-self: stretch;
-  margin-top: -1px;
-  font-family: var(--www-jobkorea-co-kr-semantic-input-font-family);
-  font-weight: var(--www-jobkorea-co-kr-semantic-input-font-weight);
-  color: #ffffff;
-  font-size: var(--www-jobkorea-co-kr-semantic-input-font-size);
-  letter-spacing: var(--www-jobkorea-co-kr-semantic-input-letter-spacing);
-  line-height: var(--www-jobkorea-co-kr-semantic-input-line-height);
-  font-style: var(--www-jobkorea-co-kr-semantic-input-font-style);
 }
 
 .potopolio-input-page .button-6 {
@@ -1454,7 +1645,28 @@
   border: 1px solid;
   border-color: var(--wwwjobkoreacokrmystic);
 }
-
+.x_frame {
+  display: flex;
+  width: 850px;
+  height: 62px;
+  justify-content: center;
+  padding: 1px;
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dddddd;
+}
+.x_frame_1 {
+  display: flex;
+  width: 180px;
+  height: 62px;
+  justify-content: center;
+  padding: 1px;
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dddddd;
+}
 .potopolio-input-page .background-border-18 {
   position: relative;
   width: 450px;
@@ -1658,9 +1870,8 @@
 .potopolio-input-page .label-12 {
   position: absolute;
   right:0;
-
   height: 40px;
-  width: 150px;
+  width: 160px;
 }
 
 .potopolio-input-page .image-14 {
@@ -1675,7 +1886,7 @@
   position: absolute;
   height: 21px;
   top: 8px;
-  left: 20px;
+  left: 30px;
   font-family: var(--www-jobkorea-co-kr-semantic-label-font-family);
   font-weight: var(--www-jobkorea-co-kr-semantic-label-font-weight);
   color: #000000;
@@ -1932,11 +2143,11 @@
 }
 
 .personal .background-border-3 {
-  width: 483px;
-  top: 98px;
-  
+  width: 683px;
+  top:20px;
+  left:-110px;
   position: relative;
-  height: 62px;
+  height: 132px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
