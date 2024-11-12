@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity(name = "work_exp")
-public class WorkExp extends CommonDateField {
-
+public class WorkExp extends CommonDateField implements Summarizable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.AcademicActivity;
+import me.leewonjun.dewminas.domains.Summarizable;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcademicActivitySummary {
+public class AcademicActivitySummary implements Specifiable {
+    private Long id;
     private String activityName;
     private String institutionName;
     private String conferenceName;
@@ -23,5 +25,16 @@ public class AcademicActivitySummary {
         this.institutionName = activity.getInstitutionName();
         this.conferenceName = activity.getConferenceName();
         this.activityDate = activity.getActivityDate();
+        this.id = activity.getId();
+    }
+
+    @Override
+    public Summarizable specify() {
+        return AcademicActivity.builder()
+                .activityName(this.activityName)
+                .conferenceName(this.conferenceName)
+                .activityDate(this.activityDate)
+                .academicInstitution(this.institutionName)
+                .build();
     }
 }

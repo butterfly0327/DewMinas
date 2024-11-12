@@ -20,12 +20,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class ProjectSummary {
+    private Long id;
     private String title;
     private String shortComment;
     private String rep_photo_url;
     private List<String> token_url;
 
     public ProjectSummary(Project original) {
+        this.id = original.getId();
         this.title = original.getTitle();
         this.shortComment = original.getShortComment();
         this.rep_photo_url = original.getRepImage() != null ? original.getRepImage().getUrl() : null;

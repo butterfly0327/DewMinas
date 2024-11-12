@@ -29,3 +29,10 @@ public class UpdateResumeRequest {
     private List<EducationalExpSummary> eduExps;
     private List<WorkExpSummary> workExps;
 }
+
+/* 이력서 등록된 상태
+*  1. 이력서 수정 버튼 클릭
+*  2. 이력서 수정 페이지로 감
+*  3. 이미 저장된 이력서 데이터 -> ResumeResponse
+*  4. 수정된 이력서 데이터 전송 -> UpdateResumeRequest
+* */

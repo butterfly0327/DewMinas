@@ -39,6 +39,7 @@ public class ResumeApiController {
 
     @PutMapping("/api/resume/{id}")
     public ResponseEntity updateResume(@PathVariable(name = "id") Long id, @RequestBody UpdateResumeRequest request) {
+        resumeService.updateResume(id, request);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

@@ -6,15 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
+import me.leewonjun.dewminas.dto.resume_summaries.EducationalExpSummary;
+import me.leewonjun.dewminas.dto.resume_summaries.Specifiable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity(name = "educational_exp")
-public class EducationalExp extends CommonDateField {
+public class EducationalExp extends CommonDateField implements Summarizable, Updatable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -42,5 +43,12 @@ public class EducationalExp extends CommonDateField {
         this.toDate = toDate;
         this.toNow = toNow;
         this.resume = resume;
+    }
+
+    @Override
+    public boolean updateData(Specifiable summary) {
+        boolean res = false;
+        EducationalExpSummary expSummary = (EducationalExpSummary) summary;
+        return res;
     }
 }

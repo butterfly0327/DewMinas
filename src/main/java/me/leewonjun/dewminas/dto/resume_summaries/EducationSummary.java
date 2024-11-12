@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.Education;
+import me.leewonjun.dewminas.domains.Summarizable;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EducationSummary {
+public class EducationSummary implements Specifiable{
+    private Long id;
     private Short type; // 교육 타입 : 고등학교, 대학교
     private String institutionName; // 기관 명
     private String major; // 전공, 고등학교의 경우 - 인문계, 상업계, 공업계 etc..
@@ -37,6 +39,22 @@ public class EducationSummary {
         this.toDate = edu.getToDate();
         this.toNow = edu.getToNow();
         this.status = edu.getStatus();
+        this.id = edu.getId();
     }
 
+    @Override
+    public Summarizable specify() {
+        return Education.builder()
+                .type(this.type)
+                .institutionName(this.institutionName)
+                .degree(this.degree)
+                .major(this.major)
+                .status(this.status)
+                .gpa(this.gpa)
+                .maxGpa(this.maxGpa)
+                .fromDate(this.fromDate)
+                .toDate(this.toDate)
+                .toNow(this.toNow)
+                .build();
+    }
 }

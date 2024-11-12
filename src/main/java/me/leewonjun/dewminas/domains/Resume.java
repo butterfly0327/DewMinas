@@ -26,6 +26,8 @@ public class Resume {
     @JoinColumn(name="owner_email")
     private User owner;
 
+    @Column(name = "desired_position")
+    private String desiredPosition;
 //    @Column(name = "color_scheme", nullable = false)
 //    private Long colorScheme;
 

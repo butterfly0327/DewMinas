@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class License {
+public class License implements Summarizable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -32,9 +32,9 @@ public class License {
     private Resume resume;
 
     @Builder
-    public License(String name, String organization, LocalDateTime issuedAt) {
+    public License(String name, String organizationName, LocalDateTime issuedAt) {
         this.name = name;
-        this.organizationName = organization;
+        this.organizationName = organizationName;
         this.issuedAt = issuedAt;
     }
 }

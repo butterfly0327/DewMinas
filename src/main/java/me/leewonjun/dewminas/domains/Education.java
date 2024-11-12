@@ -6,15 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
+import me.leewonjun.dewminas.dto.resume_summaries.EducationSummary;
+import me.leewonjun.dewminas.dto.resume_summaries.Specifiable;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity(name="educations")
-public class Education extends CommonDateField {
+public class Education extends CommonDateField implements Summarizable, Updatable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -63,4 +64,47 @@ public class Education extends CommonDateField {
         this.toNow = toNow;
     }
 
+    @Override
+    public boolean updateData(Specifiable summary) {
+        EducationSummary educationSummary = (EducationSummary) summary;
+        boolean res = false;
+
+        if(this.type != educationSummary.getType()) {
+            this.type = educationSummary.getType(); res = true;
+        }
+        if(this.status != educationSummary.getStatus()) {
+            this.status = educationSummary.getStatus(); res = true;
+        };
+        if(!this.institutionName.equals(educationSummary.getInstitutionName())){
+            this.institutionName = educationSummary.getInstitutionName(); res = true;
+        }
+        if(this.major.equals(educationSummary.getMajor())) {
+            this.major = educationSummary.getMajor(); res = true;
+        }
+        if(this.degree.equals(educationSummary.getDegree())){
+            this.degree = educationSummary.getDegree(); res = true;
+        }
+        if(this.gpa != educationSummary.getGpa()) {
+            this.gpa = educationSummary.getGpa(); res = true;
+        }
+        if(this.maxGpa != educationSummary.getMaxGpa()) {
+            this.maxGpa = educationSummary.getMaxGpa(); res = true;
+        }
+        if(!this.fromDate.equals(educationSummary.getFromDate())) {
+            this.fromDate = LocalDateTime.of(
+                    educationSummary.getFromDate().toLocalDate(),
+                    educationSummary.getFromDate().toLocalTime()
+            ); res = true;
+        }
+        if(!this.toDate.equals(educationSummary.getToDate())) {
+            this.toDate = LocalDateTime.of(
+                    educationSummary.getToDate().toLocalDate(),
+                    educationSummary.getFromDate().toLocalTime()
+            ); res = true;
+        }
+        if(this.toNow != educationSummary.isToNow()) {
+            this.toNow = educationSummary.isToNow(); res = true;
+        }
+        return res;
+    }
 }

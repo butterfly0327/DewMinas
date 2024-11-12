@@ -15,10 +15,10 @@ public class RepositoryLink {
     private RepoLinkPk id;
 
     @Column(name = "ropo_type", nullable = false)
-    private Integer repoType;
+    private Short repoType; // 0 : github
 
     @Builder
-    public RepositoryLink(RepoLinkPk pk, Integer repoType) {
+    public RepositoryLink(RepoLinkPk pk, Short repoType) {
         this.id = pk;
         this.repoType = repoType;
     }

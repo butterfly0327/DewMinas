@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.leewonjun.dewminas.dto.resume_summaries.AcademicActivitySummary;
+import me.leewonjun.dewminas.dto.resume_summaries.Specifiable;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity(name = "academic_activities")
-public class AcademicActivity {
+public class AcademicActivity implements Summarizable, Updatable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -41,5 +43,28 @@ public class AcademicActivity {
         this.institutionName = academicInstitution;
         this.conferenceName = conferenceName;
         this.resume = resume;
+    }
+
+    @Override
+    public boolean updateData(Specifiable summary) {
+        AcademicActivitySummary activitySummary = (AcademicActivitySummary) summary;
+        boolean res = false;
+
+        if(!this.activityName.equals(activitySummary.getActivityName())) {
+            this.activityName = activitySummary.getActivityName(); res = true;
+        }
+        if(!this.activityDate.equals(activitySummary.getActivityDate())) {
+            this.activityDate = LocalDateTime.of(
+                    activitySummary.getActivityDate().toLocalDate(),
+                    activitySummary.getActivityDate().toLocalTime()); res = true;
+        }
+        if(!this.institutionName.equals(activitySummary.getInstitutionName())) {
+            this.institutionName = activitySummary.getInstitutionName();  res = true;
+        }
+        if(!this.conferenceName.equals(activitySummary.getConferenceName())) {
+            this.conferenceName = activitySummary.getConferenceName(); res = true;
+        }
+
+        return res;
     }
 }
