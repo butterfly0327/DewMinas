@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', function () {
       eduExpList: [],
       acaActList: [],
       workExpList: [],
-      licenseList: []
+      licenseList: [],
+      desiredPosition: "" // desiredPosition 추가
     };
 
     // 모든 입력 값 수집 (hidden 클래스 제외)
@@ -192,6 +193,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!name) return; // name 속성이 없는 경우 무시
 
         console.log('Processing input:', name); // 디버깅용
+
+        // desiredPosition 예외 처리
+        if (name === "desiredPosition") {
+          allData.desiredPosition = input.value.trim(); // desiredPosition은 배열이 아닌 단일 값으로 처리
+          return; // 다른 처리 하지 않도록 early return
+        }
 
         const matches = name.match(/^(\w+)\[(\d+)]\.(\w+)$/); // 정규식으로 파싱
         if (!matches) {
@@ -227,9 +234,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 빈 객체를 가진 배열 항목을 제거하는 코드 추가
     Object.keys(allData).forEach(key => {
-      allData[key] = allData[key].filter(item => {
-        return Object.keys(item).length > 0; // 객체가 비어 있지 않은 경우만 포함
-      });
+      if (key !== "desiredPosition") {  // desiredPosition은 배열이 아니므로 제외
+        allData[key] = allData[key].filter(item => {
+          return Object.keys(item).length > 0; // 객체가 비어 있지 않은 경우만 포함
+        });
+      }
     });
 
     // 데이터를 JSON 문자열로 변환하여 localStorage에 저장
@@ -238,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Final JSON Data:', allData); // 최종 데이터 디버깅용 출력
   });
 });
+
 
 
 
