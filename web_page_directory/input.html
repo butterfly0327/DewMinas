@@ -27,52 +27,22 @@
     </div>
     <div class="div">
       <div class="form">
-        <div class="maincontainer" name="introduce">
-          <div class="heading">
-            <div class="heading-2">자기소개</div>
-            <p class="essential">
-              <span class="s2"> 필수 입력 정보입니다.</span>
-          </div>
-          <div class="mainframe">
-            <div class="subframe">
-              <div class="contentframe">
-                <textarea class="text_area_1" name="i_introduce"
-                  placeholder="기업에게 나에 대해 알려줍시다. 강점, 목표, 관심분야도 좋아요."></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
+        
         <div class="personal" name="personal">
           <div class="heading">
             <div class="heading-2">인적사항</div>
-            <p class="essential">
-              <span class="text-wrapper-2"> 필수 입력 정보입니다.</span>
-            </p>
           </div>
           <div class="background-border">
-            <div class="overlap-group-wrapper">
-              <p class="div-3"><span class="text-wrapper-4">휴대폰번호</span> <span class="span">*</span></p>
-              <input class="text_area" name="p_phone" placeholder="010-1234-1234">
-            </div>
-            <div class="label-wrapper">
-              <p class="div-3"><span class="text-wrapper-4">영어이름</span> <span class="span">*</span></p>
-              <input class="text_area" name="p_englishname" placeholder="hongkildong">
-            </div>
-            <div class="background-border-2">
-              <p class="div-3"><span class="text-wrapper-4">이름</span> <span class="span">*</span></p>
-              <input class="text_area" name="p_name" placeholder="홍길동">
-            </div>
-            <div class="overlap-wrapper">
-              <p class="div-3"><span class="text-wrapper-4">이메일</span> <span class="span">*</span></p>
-              <input class="text_area" name="p_email" placeholder="1234@naver.com">
-            </div>
             <div class="background-border-3">
               <p class="div-3"><span class="text-wrapper-4">간단한 자기 소개</span> </p>
-              <input class="text_area" name="p_introduce" placeholder="software enginear">
+              <textarea class="text_area_1" name="desiredPosition" placeholder="software enginear"></textarea>
             </div>
             <div class="border">
-              <div class="text-wrapper-5">사진추가</div>
+              <div class="image-container"></div>
+              <button id="addImageBtn" class="add-image-btn">사진추가</button>
+              <input class="image" type="file" id="imageInput" accept="image/*" style="display: none;" />
             </div>
+
           </div>
         </div>
         <div class="maincontainer" name="education">
@@ -80,32 +50,65 @@
             <div class="heading-2">학력</div>
             <div class="container-9">
               <div class="label-12">
-                <img class="image-14" src="img/image-30.png" />
                 <div class="text-wrapper-18">고등학교 미만 졸업</div>
+                <input class="check" type="checkbox"  name="educationList[0].type">
               </div>
             </div>
           </div>
   
           <div class="mainframe">
-            <div class="container-8">
+            <div class="subframe">
               <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
+            
+              <!-- Institution Name -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">대학교</span></p>
-                <input class="text_area" name="e_univercity" placeholder="동의대학교">
+                <input class="text_area" name="educationList[0].institution_name" placeholder="동의대학교" required>
               </div>
+            
+              <!-- Department -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">학과</span></p>
-                <input class="text_area" name="e_department" placeholder="컴퓨터공학과">
+                <input class="text_area" name="educationList[0].department" placeholder="컴퓨터공학과" required>
               </div>
+            
+              <!-- Degree -->
               <div class="e_frame">
-                <p class="div-3"><span class="text-wrapper-4">학사</span></p>
-                <input class="text_area" name="e_degree" placeholder="학사">
+                <p class="div-3"><span class="text-wrapper-4">학위</span></p>
+                <input class="text_area" name="educationList[0].degree" placeholder="학사">
               </div>
+            
+              <!-- GPA -->
               <div class="e_frame_gpa">
-                <p class="div-3"><span class="text-wrapper-4">gpa</span></p>
-                <input class="text_area" name="e_score" placeholder="4.49 / 4.5">
+                <p class="div-3"><span class="text-wrapper-4">GPA</span></p>
+                <input class="text_area" name="educationList[0].gpa" placeholder="4.49">
+              </div>
+            
+              <!-- Max GPA -->
+              <div class="e_frame_gpa">
+                <p class="div-3"><span class="text-wrapper-4">최대 GPA</span></p>
+                <input class="text_area" name="educationList[0].max_gpa" placeholder="4.5">
+              </div>
+            
+              <!-- From Date -->
+              <div class="e_frame">
+                <p class="div-3"><span class="text-wrapper-4">시작 날짜</span></p>
+                <input class="text_area" type="date" name="educationList[0].from_Date" required>
+              </div>
+            
+              <!-- To Date -->
+              <div class="e_frame">
+                <p class="div-3"><span class="text-wrapper-4">종료 날짜</span></p>
+                <input class="text_area" type="date" name="educationList[0].to_date" required>
+              </div>
+            
+              <!-- To Now (Current Enrollment) -->
+              <div class="e_frame">
+                <span class="e_checklist">현재 재학 중</span>
+                <input class="e_check" type="checkbox"  name="educationList[0].to_now" >
               </div>
             </div>
+            
           </div>
           <button class="plusbutton" type="button" data-section="education">
             <img class="image-6" src="img/image-26.png" />
@@ -117,18 +120,18 @@
             <div class="heading-2">자격증</div>
           </div>
           <div class="mainframe">
-            <div class="container-2">
-              <div class="background-border-18">
+            <div class="subframe">
+              <div class="l_frame_1">
                   <p class="div-3"><span class="text-wrapper-4">자격증 명</span></p>
-                  <input class="text_area" name="l_name" placeholder="정보처리기사">
+                  <input class="text_area" name="licenseList[0].name" placeholder="정보처리기사">
               </div>
-              <div class="background-border-19">
+              <div class="l_frame_2">
                 <p class="div-3"><span class="text-wrapper-4">발행처</span></p>
-                  <input class="text_area" name="l_position" placeholder="국립국어원">
+                  <input class="text_area" name="licenseList[0].organization_name" placeholder="국립국어원">
               </div>
-              <div class="background-border-20">
-                <p class="div-3"><span class="text-wrapper-4">취득월</span></p>
-                <input class="text_area" name="l_year" placeholder="2024/20/10">
+              <div class="date">
+                <p class="div-3"><span class="text-wrapper-4">취득일</span></p>
+                <input class="text_area" name="licenseList[0].issued_data" placeholder="2024/20/10" type="date">
               </div>
               <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
             </div>
@@ -138,142 +141,175 @@
     <div class="text-wrapper-7">추가</div>
   </button>
         </div>
-        <div class="maincontainer" name="reward">
+        <div class="maincontainer" name="rewards">
           <div class="heading">
             <div class="heading-2">수상</div>
           </div>
           <div class="mainframe">
-            <div class="container-7">
+            <div class="subframe">
               <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
-              <div class="background-border-15">
-                  <p class="div-3"><span class="text-wrapper-4">수상명</span></p>
-                  <input class="text_area" name="r_name" placeholder="지역상">
+              <div class="r_frame">
+                <p class="div-3"><span class="text-wrapper-4">수상명</span></p>
+                <input class="text_area" name="awardList[0].award_name" placeholder="지역상">
               </div>
-              <div class="background-border-16">
+              <div class="r_frame">
+                <p class="div-3"><span class="text-wrapper-4">대회명</span></p>
+                <input class="text_area" name="awardList[0].competition_name" placeholder="전국 컴퓨터 경진대회">
+              </div>
+              <div class="r_frame">
                 <p class="div-3"><span class="text-wrapper-4">수여기관</span></p>
-                  <input class="text_area" name="r_institution" placeholder="동의대학교">
+                <input class="text_area" name="awardList[0].organization_name" placeholder="동의대학교">
               </div>
-              <div class="background-border-17">
-                    <p class="div-3"><span class="text-wrapper-4">취득월</span></p>
-                  <input class="text_area" name="r_year" placeholder="2024/04/04">
-                  
+              <div class="date">
+                <p class="div-3"><span class="text-wrapper-4">수상일</span></p>
+                <input class="text_area" name="awardList[0].award_date" placeholder="2024-04-04" type="date">
               </div>
-
             </div>
-            
           </div>
-            <button class="plusbutton" data-section="reward">
-              <img class="image-6" src="img/image-26.png" />
-              <div class="text-wrapper-7">추가</div>
-            </button>
+          <button class="plusbutton" data-section="rewards">
+            <img class="image-6" src="img/image-26.png" />
+            <div class="text-wrapper-7">추가</div>
+          </button>
         </div>
+        
         <div class="maincontainer" name="experience">
           <div class="heading">
             <div class="heading-2">교육이수</div>
           </div>
           <div class="mainframe">
-            <div class="container-6">
-              <div class="border-2">
-                  <p class="div-3"><span class="text-wrapper-4">교육 내용</span></p>
-                  <textarea class="text_area_1" name="x_content" placeholder="이수하신 교육과정에 대해 적어주세요."></textarea>
+            <div class="subframe">
+              <div class="image-wrapper">
+                  <img class="image-5" src="img/image-27.png" />
               </div>
-              <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
-              <div class="background-border-12">
+              <div class="x_frame">
                   <p class="div-3"><span class="text-wrapper-4">교육명</span></p>
-                  <input class="text_area" name="x_name" placeholder="지역 발전 사회화 교육">
+                  <input class="text_area" name="eduExpList[0].education_name" placeholder="지역 발전 사회화 교육">
               </div>
-              <div class="background-border-13">
-                <p class="div-3"><span class="text-wrapper-4">교육기관</span></p>
-                  <input class="text_area" name="x_institution" placeholder="부산시">
+              <div class="x_frame_1">
+                  <p class="div-3"><span class="text-wrapper-4">교육기관</span></p>
+                  <input class="text_area" name="eduExpList[0].organization_name" placeholder="부산시">
               </div>
-              <div class="overlap-group-3">
-                <div class="background-border-9">
-                  <p class="div-3"><span class="text-wrapper-4">시작년월</span></p>
-                  <input class="text_area" name="x_start_year" placeholder="2024/6">
-                </div>
-                <div class="background-border-10">
+              <div class="x_frame_1">
+                      <p class="div-3"><span class="text-wrapper-4">시작년월</span></p>
+                      <input class="text_area" name="eduExpList[0].from_date" placeholder="2024/6" type="month">
                   
-                  <p class="div-3"><span class="text-wrapper-4">종료년월</span></p>
-                  <input class="text_area" name="x_end_year" placeholder="2024/8">
-                </div>
               </div>
-            </div>
+              <div class="x_frame_1">
+                      <p class="div-3"><span class="text-wrapper-4">종료년월</span></p>
+                      <input class="text_area" name="eduExpList[0].to_date" placeholder="2024/8" type="month">
+              </div>
+              <div class="e_frame">
+                <span class="e_checklist">현재 진행 중</span>
+                <input class="e_check" type="checkbox"  name="eduExpList[0].to_now" value="1">
+              </div>
+          </div>
+          
+
           </div>
           <button class="plusbutton" data-section="experience">
             <img class="image-6" src="img/image-26.png" />
             <div class="text-wrapper-7">추가</div>
           </button>
         </div>     
-        <div class="maincontainer" name="career">
+
+        <div class="maincontainer" name="academy">
           <div class="heading">
-            <div class="heading-2">경력</div>
+            <div class="heading-2">학술활동</div>
           </div>
           <div class="mainframe">
-            <div class="container-4">
-              <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
-              <div class="border">
-                <p class="div-3"><span class="text-wrapper-4">담당 업무</span></p>
-                <textarea class="text_area_1" name="c_work" placeholder="내가 무엇을 담당했는지 설명해주세요"></textarea>
+            <div class="subframe">
+              <div class="image-wrapper">
+                  <img class="image-5" src="img/image-27.png" />
               </div>
-              <div class="overlap">
-                <button class="button-3">
-                  <p class="div-3"><span class="text-wrapper-4">직급/직책</span></p>
-                  <input class="text_area" name="c_position" placeholder="과장 4호봉/영업본부장">
-                </button>
-                <div class="background-border-6">
-
-                  <p class="div-3"><span class="text-wrapper-4">담당직무</span></p>
-                  <input class="text_area" name="c_charge" placeholder="출판업">
-                </div>
+              <div class="x_frame">
+                  <p class="div-3"><span class="text-wrapper-4">제목</span></p>
+                  <input class="text_area" name="acaActList[0].education_name" placeholder="지역 발전 사회화 논문">
               </div>
-              <div class="background-border-7">
-                <p class="div-3"><span class="text-wrapper-4">연봉</span></p>
-                  <input class="text_area" name="c_income" placeholder="100만">
+              <div class="x_frame_1">
+                  <p class="div-3"><span class="text-wrapper-4">학술기관</span></p>
+                  <input class="text_area" name="acaActList[0].academic_institution" placeholder="부산시">
               </div>
-              <div class="overlap-group">
-                <div class="background-border-8">
-
-                    <p class="div-3"><span class="text-wrapper-4">회사명</span></p>
-                  <input class="text_area" name="c_name" placeholder="동의재약">
-
-                </div>
-                <div class="background-border-6">
-                  <p class="div-3"><span class="text-wrapper-4">부서명</span></p>
-                  <input class="text_area" name="c_Department" placeholder="약사오">
-                </div>
-              </div>
-              <div class="overlap-group-2">
-                <div class="background-border-9">
-
-                    <p class="div-3"><span class="text-wrapper-4">입사년월</span></p>
-                  <input class="text_area" name="c_start_year" placeholder="2024">
-
-                </div>
-                <div class="background-border-10">
-
-                    <p class="div-3"><span class="text-wrapper-4">퇴사년월</span></p>
-                  <input class="text_area" name="c_end_year" placeholder="2044">
-
-                </div>
-              </div>
-              <div class="label-8">
-                <img class="image-8" src="img/image-30.png" />
-                <div class="text-wrapper-12">재직중</div>
-              </div>
+              <div class="x_frame_1">
+                <p class="div-3"><span class="text-wrapper-4">컨퍼런스 이름</span></p>
+                <input class="text_area" name="acaActList[0].conferenace_name" placeholder="컨퍼런스">
             </div>
+              <div class="x_frame_1">
+                      <p class="div-3"><span class="text-wrapper-4">제출일</span></p>
+                      <input class="text_area" name="acaActList[0].activity_date" placeholder="2024/8/1" type="month">
+              </div>
           </div>
-          <button class="plusbutton" data-section="career">
+          
+
+          </div>
+          <button class="plusbutton" data-section="academy">
             <img class="image-6" src="img/image-26.png" />
             <div class="text-wrapper-7">추가</div>
           </button>
-        </div>           
+        </div>     
+
+
+
+<div class="maincontainer" name="career">
+    <div class="heading">
+        <div class="heading-2">경력</div>
+    </div>
+    <div class="mainframe">
+        <div class="subframe">
+            <div class="image-wrapper">
+                <img class="image-5" src="img/image-27.png" alt="프로필 이미지">
+            </div>
+            
+            
+            
+            <!-- 직급 -->
+            <div class="c_frame">
+                <p class="div-3"><span class="text-wrapper-4">직급/직책</span></p>
+                <input class="text_area" name="workExpList[0].job_title" placeholder="과장 4호봉/영업본부장">
+            </div>
+            
+            <!-- 회사명 -->
+            <div class="c_frame">
+                <p class="div-3"><span class="text-wrapper-4">회사명</span></p>
+                <input class="text_area" name="workExpList[0].company_name" placeholder="동의제약">
+            </div>
+            
+            <!-- 입사 및 퇴사 년월 -->
+            <div class="c_frame_1">
+                <div class="background-border-9">
+                    <p class="div-3"><span class="text-wrapper-4">입사년월</span></p>
+                    <input class="text_area" name="workExpList[0].from_date" placeholder="2024" type="month">
+                </div>
+                
+                <div class="background-border-10">
+                    <p class="div-3"><span class="text-wrapper-4">퇴사년월</span></p>
+                    <input class="text_area" name="workExpList[0].to_date" placeholder="2044" type="month">
+                </div>
+            </div>
+            <div class="c_frame_2">
+                <p class="div-3"><span class="text-wrapper-4">담당 업무</span></p>
+                <textarea class="text_area_1" name="workExpList[0].responsibilities" placeholder="내가 무엇을 담당했는지 설명해주세요"></textarea>
+            </div>
+
+
+
+
+        </div>
+        
+        
+    </div><!-- 추가 버튼 -->
+        <button class="plusbutton" data-section="career">
+            <img class="image-6" src="img/image-26.png" alt="추가 버튼 이미지">
+            <div class="text-wrapper-7">추가</div>
+        </button>
+</div>
+
+      
         <div class="maincontainer" name="skill">
           <div class="heading">
             <div class="heading-2">기술</div>
           </div>
           <div class="mainframe">
-            <div class="subframe">
-              <div class="contentframe">
+              <div class="subframe">
                 <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
                 <div class="background-border-4">
                   <p class="div-3"><span class="text-wrapper-4">기술명</span></p>
@@ -281,19 +317,16 @@
                 </div>
                 <div class="label-wrapper">
                   <p class="div-3"><span class="text-wrapper-4">레벨</span></p>
-                  <select class="text_area" name="s_level">
+                  <select class="select" name="s_level">
                       <option value="level_1">1</option>
                       <option value="level_2">2</option>
                       <option value="level_3">3</option>
                   </select>
-                </div>
-              
-                <div class="background-border-5">
+              </div>
+              <div class="background-border-5">
                   <p class="div-3"><span class="text-wrapper-4">기술 소개</span></p>
                   <input class="text_area" name="s_introduce" placeholder="내가 무엇을 잘해서 이런 레벨로 정했는지 소개해 주세요">
                 </div>
-                
-              </div>
               
             </div>
 
@@ -308,19 +341,10 @@
         
       </div>
       <div class="container">
-        <div class="background-border">
-          <a class="button" id="preview" href="./portpolio_preview.html">미리보기</a>
-        </div>
-        <button class="div-wrapper">
-          <div class="text-wrapper">이력서저장</div>
-        </button>
+        
         <div class="background-border-2">
-          <div class="heading">이력서 항목</div>
+          <div class="container_heading">이력서 항목</div>
           <div class="list">
-            <div class="item-link">
-              <div class="text-wrapper-2">자기소개</div>
-              <img class="image" src="img/image-5.png" />
-            </div>
             <div class="item-link">
               <div class="text-wrapper-2">인적사항</div>
               <img class="img" src="img/image.png" />
@@ -349,7 +373,7 @@
               </div>
             </button>
             
-            <button class="div-2 toggle-button" data-section="reward">
+            <button class="div-2 toggle-button" data-section="rewards">
               <div class="link">
                 <img class="image" src="img/trophy.png" />
                 <div class="text-wrapper-3">수상</div>
@@ -364,6 +388,17 @@
               <div class="link">
                 <div class="text-wrapper-3">교육이수</div>
                 <img class="image" src="img/image-2.png" />
+              </div>
+              <div class="rectangle-wrapper">
+                <div class="rectangle"></div>
+                <div class="rectangle1"></div>
+              </div>
+            </button>
+
+            <button class="div-2 toggle-button" data-section="academy">
+              <div class="link">
+                <div class="text-wrapper-3">논문</div>
+                <img class="image" src="img/image-3.png" />
               </div>
               <div class="rectangle-wrapper">
                 <div class="rectangle"></div>
@@ -394,7 +429,14 @@
             </button>
             
           </div>
+          
         </div>
+        <button class="background-border">
+          <a class="button" id="preview" href="./portpolio_preview.html">미리보기</a>
+        </button>
+        <button class="div-wrapper">
+          <div class="text-wrapper">이력서저장</div>
+        </button>
       </div>
 
 

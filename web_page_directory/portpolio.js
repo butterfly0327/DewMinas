@@ -1,8 +1,6 @@
-
 const allData = JSON.parse(localStorage.getItem('formData'));  // 저장된 데이터 가져오기
 
 document.addEventListener("DOMContentLoaded", function() {
-    
 
     // 데이터가 없으면 바로 종료
     if (!allData) return;
@@ -26,259 +24,444 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const fullName = document.createElement("p");
         fullName.classList.add("name");
-        fullName.textContent = data.p_name && data.p_name[0] ? `${data.p_name[0]} (${data.p_englishname ? data.p_englishname[0] : ''})` : "이원준 (WONJUN LEE)";
+        fullName.textContent = data.name && data.name[0] ? `${data.name[0]} (${data.englishName ? data.englishName[0] : ''})` : "이원준 (WONJUN LEE)";
         introFrame.appendChild(fullName);
 
         const role = document.createElement("p");
-        role.classList.add("role");
-        role.textContent = data.p_englishname && data.p_englishname[0] ? data.p_englishname[0] : "Software Engineer";
+        role.classList.add("desiredPosition");
+        role.textContent = data.role && data.role[0] ? data.role[0] : "Software Engineer";
         introFrame.appendChild(role);
 
         const phoneNumber = document.createElement("p");
         phoneNumber.classList.add("contact-info");
-        phoneNumber.textContent = data.p_phone && data.p_phone[0] ? `Phone. ${data.p_phone[0]}` : "Phone. 010-1234-5678";
+        phoneNumber.textContent = data.phone && data.phone[0] ? `Phone. ${data.phone[0]}` : "Phone. 010-1234-5678";
         introFrame.appendChild(phoneNumber);
 
         const emailAddress = document.createElement("p");
         emailAddress.classList.add("contact-info");
-        emailAddress.textContent = data.p_email && data.p_email[0] ? `e-mail. ${data.p_email[0]}` : "e-mail. evenil0206@gmail.com";
+        emailAddress.textContent = data.email && data.email[0] ? `e-mail. ${data.email[0]}` : "e-mail. evenil0206@gmail.com";
         introFrame.appendChild(emailAddress);
 
         introContainer.appendChild(introFrame);
         portfolioContainer.appendChild(introContainer);
     }
 
-    // Education 섹션 생성
-    function createEducationSection(data) {
-        // 만약 data.e_univercity가 비어 있으면 함수를 종료
-        if (!data.e_univercity || data.e_univercity.length === 0) return;
+    function createEducationSection(allData) {
+        // allData.educationList가 비어 있으면 함수 종료
+        if (!allData.educationList || allData.educationList.length === 0) return;
     
-        // 새로운 섹션 div 생성
+        // Education 섹션 컨테이너 생성
         const educationContainer = document.createElement("div");
         educationContainer.classList.add("content-container");
         educationContainer.setAttribute("name", "education");
     
-        // 섹션 제목 추가
+        // 섹션 제목 생성
         const title = document.createElement("h2");
         title.classList.add("content-head");
         title.textContent = "/ Education /";
         educationContainer.appendChild(title);
     
-        // data.e_univercity 배열을 순회하면서 각 항목을 추가
-        data.e_univercity.forEach((university, index) => {
+        // 각 교육 항목을 처리
+        allData.educationList.forEach((education, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
     
-            // bulletPoint 추가
+            // Bullet Point 생성
             const bulletPoint = document.createElement("p");
             bulletPoint.classList.add("content-0");
             bulletPoint.textContent = "•";
             contentFrame.appendChild(bulletPoint);
     
-            // 대학 정보 추가
+            // 교육 정보 생성
             const educationInfo = document.createElement("p");
             educationInfo.classList.add("content-1");
-            educationInfo.textContent = `${university || "동의대학교"} / ${data.e_department[index] || "컴퓨터공학과"} / ${data.e_degree[index] || "학사"}`;
+            educationInfo.textContent = `${education. institution_name || "대학교"} / ${education.department || "컴퓨터공학과"} / ${education.degree || "학사"}`;
             contentFrame.appendChild(educationInfo);
-    
-            // GPA 정보 추가
+            // GPA 정보 생성
+            const ty = document.createElement("p");
+            ty.classList.add("content-1");
+            ty.textContent = `${education.to_now === "1" ? "재학중" : "졸업"}`;
+            contentFrame.appendChild(ty);
+            // GPA 정보 생성
             const gpa = document.createElement("p");
             gpa.classList.add("content-2");
-            gpa.textContent = `GPA : ${data.e_score[index] || "4.49 / 4.5"}`;
+            gpa.textContent = `GPA : ${education.gpa || "4.49"} / ${education.max_gpa || "4.5"}`;
             contentFrame.appendChild(gpa);
-    
-            // contentFrame를 educationContainer에 추가
+            
+
+            const miniframe=document.createElement("div");
+            miniframe.classList.add("miniframe");
+            const date = document.createElement("p");
+            date.classList.add("content-2")
+            date.textContent = `${education.from_date || "2000.10.15"} ~ ${education.to_now === "1" ? new Date().toLocaleDateString() : education.to_date || "2000.10.15"}`;
+            // 각 항목을 Education Container에 추가
+            miniframe.appendChild(date);
+            contentFrame.appendChild(miniframe);
             educationContainer.appendChild(contentFrame);
+
         });
     
-        // main-container에 educationContainer 추가
-        const portfolioContainer = document.querySelector(".main-container[name='portfolio-container']");
-        if (portfolioContainer) {
-            portfolioContainer.appendChild(educationContainer);
-        }
+        // 최종적으로 portfolioContainer에 Education 섹션 추가
+        portfolioContainer.appendChild(educationContainer);
     }
     
+    function createLicenseSection(allData) {
+        // allData.licenseList가 비어 있으면 함수 종료
+        if (!allData.licenseList || allData.licenseList.length === 0) return;
+        
+        // License 섹션 컨테이너 생성
+        const licenseContainer = document.createElement("div");
+        licenseContainer.classList.add("content-container");
+        licenseContainer.setAttribute("name", "license");
     
+        // 섹션 제목 생성
+        const title = document.createElement("h2");
+        title.classList.add("content-head");
+        title.textContent = "/ License /";
+        licenseContainer.appendChild(title);
+    
+        // 각 라이센스 항목을 처리
+        allData.licenseList.forEach((license, index) => {
+            const contentFrame = document.createElement("div");
+            contentFrame.classList.add("content-frame");
+    
+            // Bullet Point 생성
+            const bulletPoint = document.createElement("p");
+            bulletPoint.classList.add("content-0");
+            bulletPoint.textContent = "•";
+            contentFrame.appendChild(bulletPoint);
+    
+            // 라이센스 정보 생성
+            const licenseInfo = document.createElement("p");
+            licenseInfo.classList.add("content-1");
+            licenseInfo.textContent = `${license.name || "정보처리기사"}`;
+            contentFrame.appendChild(licenseInfo);
+    
+            
+            // 날짜 정보 생성
+            const miniframe = document.createElement("div");
+            miniframe.classList.add("miniframe");
+
+            const organization = document.createElement("p");
+            organization.classList.add("content-2");
+            organization.textContent=`${license.organization_name || "국가가 인증하는 기관"}`;
+            miniframe.appendChild(organization);
+
+            const date = document.createElement("p");
+            date.classList.add("content-2");
+            date.textContent = `${license.issued_date || "2000.10.15"}`;
+            
+            miniframe.appendChild(date);
+            contentFrame.appendChild(miniframe);
+    
+            // 각 항목을 License Container에 추가
+            licenseContainer.appendChild(contentFrame);
+        });
+        portfolioContainer.appendChild(licenseContainer);
+    }
+    
+
+    // Awards 섹션 생성
     function createAwardsSection(data) {
-        // 만약 data.r_name이 비어 있으면 함수를 종료
-        if (!data.r_name || data.r_name.length === 0) return;
-    
-        // 새로운 섹션 div 생성
+        // 만약 data.awards.name이 비어 있으면 함수를 종료
+        if (!data.awardList || data.awardList.length === 0) return;
+
         const awardsContainer = document.createElement("div");
         awardsContainer.classList.add("content-container");
         awardsContainer.setAttribute("name", "award");
-    
-        // 섹션 제목 추가
+
         const title = document.createElement("h2");
         title.classList.add("content-head");
         title.textContent = "/ Awards /";
         awardsContainer.appendChild(title);
-    
-        // data.r_name 배열을 순회하면서 각 항목을 추가
-        data.r_name.forEach((name, index) => {
+
+        data.awardList.forEach((award, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
-    
-            // bulletPoint 추가
+
             const bulletPoint = document.createElement("p");
             bulletPoint.classList.add("content-0");
             bulletPoint.textContent = "•";
             contentFrame.appendChild(bulletPoint);
-    
-            // 수상 제목 추가
+
             const awardTitle = document.createElement("p");
-            awardTitle.classList.add("content-3");
-            awardTitle.textContent = name || "2024년 하계, 동계 계절학기 캡스톤 디자인 경진대회 장려상";
+            awardTitle.classList.add("content-1");
+            awardTitle.textContent = award.competition_name || "2024년 하계, 동계 계절학기 캡스톤 디자인 경진대회";
             contentFrame.appendChild(awardTitle);
-    
-            // 수상 주최기관 추가
+
+            const awardname = document.createElement("p");
+            awardname.classList.add("content-1");
+            awardname.textContent = award.award_name|| "장려상";
+            contentFrame.appendChild(awardname);
+
+            // 날짜 정보 생성
+            const miniframe = document.createElement("div");
+            miniframe.classList.add("miniframe");
+
             const awardOrganizer = document.createElement("p");
-            awardOrganizer.classList.add("content-4");
-            awardOrganizer.textContent = data.r_institution[index] || "동의대학교 LINC+ 사업단";
-            contentFrame.appendChild(awardOrganizer);
-    
-            // 수상 날짜 추가
+            awardOrganizer.classList.add("content-2");
+            awardOrganizer.textContent = award.organizer || "동의대학교 LINC+ 사업단";
+            miniframe.appendChild(awardOrganizer);
+
             const awardDate = document.createElement("p");
-            awardDate.classList.add("content-4");
-            awardDate.textContent = data.r_year[index] || "2020-11";
-            contentFrame.appendChild(awardDate);
-    
-            // contentFrame를 awardsContainer에 추가
+            awardDate.classList.add("content-2");
+            awardDate.textContent = award.award_date || "2020-11";
+            miniframe.appendChild(awardDate);
+            contentFrame.appendChild(miniframe);
             awardsContainer.appendChild(contentFrame);
         });
-    
-        // main-container에 awardsContainer 추가
-        const portfolioContainer = document.querySelector(".main-container[name='portfolio-container']");
-        if (portfolioContainer) {
-            portfolioContainer.appendChild(awardsContainer);
-        }
-    }
-    
 
-    // Experience 섹션 생성
-    function createExperienceSection(data) {
-        // 만약 data.x_name이 비어 있으면 함수를 종료
-        if (!data.x_name || data.x_name.length === 0) return;
+        portfolioContainer.appendChild(awardsContainer);
+    }
+
+// Experience 섹션 생성
+function createExperienceSection(data) {
+    // 만약 data.eduExpList가 비어 있으면 함수를 종료
+    if (!data.eduExpList || data.eduExpList.length === 0) return;
+
+    const experienceContainer = document.createElement("div");
+    experienceContainer.classList.add("content-container");
+    experienceContainer.setAttribute("name", "experience");
+
+    const title = document.createElement("h2");
+    title.classList.add("content-head");
+    title.textContent = "/ Experience /";
+    experienceContainer.appendChild(title);
+
+    // 각 경험 항목을 처리
+    data.eduExpList.forEach((experience) => {
+        const contentFrame = document.createElement("div");
+        contentFrame.classList.add("content-frame");
+
+        // Bullet Point 생성
+        const bulletPoint = document.createElement("p");
+        bulletPoint.classList.add("content-0");
+        bulletPoint.textContent = "•";
+        contentFrame.appendChild(bulletPoint);
+
+        // 경험 제목 생성
+        const experienceTitle = document.createElement("p");
+        experienceTitle.classList.add("content-1");
+        experienceTitle.textContent = experience.education_name || "미래 내일 일 경험 프로그램 프로그램";
+        contentFrame.appendChild(experienceTitle);
+
+        // 수료 상태 생성 (수료 중 / 수료 완료)
+        const to_now = document.createElement("p");
+        to_now.classList.add("content-1");
+        to_now.textContent = experience.to_now === "1" ? "수료 중" : "수료 완료";
+        contentFrame.appendChild(to_now);
+
+        // 날짜 및 주최 기관 정보 생성
+        const miniframe = document.createElement("div");
+        miniframe.classList.add("miniframe");
+
+        // 경험 주최 기관 생성
+        const experienceOrganizer = document.createElement("p");
+        experienceOrganizer.classList.add("content-2");
+        experienceOrganizer.textContent = experience.organizer || "한국융합인재교육협회";
+        miniframe.appendChild(experienceOrganizer);
+
+        // 경험 기간 생성
+        const experienceDate = document.createElement("p");
+        experienceDate.classList.add("content-2");
+        const startYear = experience.from_date || "2020-10-10";
+        const endYear = experience.to_date || "2021-10-12";
+        experienceDate.textContent = `${startYear} - ${endYear}`;
+        miniframe.appendChild(experienceDate);
+
+        // 각 항목을 experienceContainer에 추가
+        contentFrame.appendChild(miniframe);
+        experienceContainer.appendChild(contentFrame);
+    });
+
     
-        // 새로운 섹션 div 생성
-        const experienceContainer = document.createElement("div");
-        experienceContainer.classList.add("content-container");
-        experienceContainer.setAttribute("name", "experience");
+    portfolioContainer.appendChild(experienceContainer);
+}
+
+// acaActList 섹션 생성
+function createAcaActSection(data) {
+    // 만약 data.acaActList가 비어 있으면 함수를 종료
+    if (!data.acaActList || data.acaActList.length === 0) return;
+
+    const acaActContainer = document.createElement("div");
+    acaActContainer.classList.add("content-container");
+    acaActContainer.setAttribute("name", "acaAct");
+
+    const title = document.createElement("h2");
+    title.classList.add("content-head");
+    title.textContent = "/ Academic Activities /";
+    acaActContainer.appendChild(title);
+
+    // 각 활동 항목을 처리
+    data.acaActList.forEach((activity) => {
+        const contentFrame = document.createElement("div");
+        contentFrame.classList.add("content-frame");
+
+        // Bullet Point 생성
+        const bulletPoint = document.createElement("p");
+        bulletPoint.classList.add("content-0");
+        bulletPoint.textContent = "•";
+        contentFrame.appendChild(bulletPoint);
+
+        // 활동 제목 생성
+        const activityTitle = document.createElement("p");
+        activityTitle.classList.add("content-1");
+        activityTitle.textContent = activity.activity_name || "학술 활동 프로그램";
+        contentFrame.appendChild(activityTitle);
+
+        // 활동 제목 생성
+        const conference= document.createElement("p");
+        conference.classList.add("content-1");
+        conference.textContent =  activity.conference_name || "컨퍼런스 이름";
+        contentFrame.appendChild(conference);
+
+
+        // 날짜 및 주최 기관 정보 생성
+        const miniframe = document.createElement("div");
+        miniframe.classList.add("miniframe");
+
+        // 활동 주최 기관 생성
+        const activityOrganizer = document.createElement("p");
+        activityOrganizer.classList.add("content-2");
+        activityOrganizer.textContent = activity.academic_insititution|| "미정의 기관";
+        miniframe.appendChild(activityOrganizer);
+
+        // 활동 기간 생성
+        const activityDate = document.createElement("p");
+        activityDate.classList.add("content-2");
+        const startYear = activity.from_date || "2020-10";
+        activityDate.textContent = `${startYear} `;
+        miniframe.appendChild(activityDate);
+
+        // 각 항목을 acaActContainer에 추가
+        contentFrame.appendChild(miniframe);
+        acaActContainer.appendChild(contentFrame);
+    });
+
+    portfolioContainer.appendChild(acaActContainer);
+}
+
+
+
+
+
+    function createWorkExperienceSection(data) {
+        if (!data.workExpList || data.workExpList.length === 0) return;
+
+        const workExperienceContainer = document.createElement("div");
+        workExperienceContainer.classList.add("content-container");
+        workExperienceContainer.setAttribute("name", "workExperience");
     
-        // 섹션 제목 추가
         const title = document.createElement("h2");
         title.classList.add("content-head");
-        title.textContent = "/ Experience /";
-        experienceContainer.appendChild(title);
+        title.textContent = "/ Work Experience /";
+        workExperienceContainer.appendChild(title);
     
-        // data.x_name 배열을 순회하면서 각 항목을 추가
-        data.x_name.forEach((name, index) => {
+        data.workExpList.forEach((workExp, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
-    
-            // bulletPoint 추가
+        
+            // Bullet Point 생성
             const bulletPoint = document.createElement("p");
             bulletPoint.classList.add("content-0");
             bulletPoint.textContent = "•";
             contentFrame.appendChild(bulletPoint);
-    
-            // 경험 제목 추가
-            const experienceTitle = document.createElement("p");
-            experienceTitle.classList.add("content-3");
-            experienceTitle.textContent = name || "미래 내일 일 경험 프로그램 프로젝트형 수료";
-            contentFrame.appendChild(experienceTitle);
-    
-            // 경험 기관 추가
-            const experienceOrganizer = document.createElement("p");
-            experienceOrganizer.classList.add("content-4");
-            experienceOrganizer.textContent = data.x_institution[index] || "한국융합인재교육협회";
-            contentFrame.appendChild(experienceOrganizer);
-    
-            // 경험 시작 년도와 종료 년도 추가
-            const experienceDate = document.createElement("p");
-            experienceDate.classList.add("content-4");
-            const startYear = data.x_start_year[index] || "2020-10-10";
-            const endYear = data.x_end_year[index] || "2021-10-12";
-            experienceDate.textContent = `${startYear} - ${endYear}`;
-            contentFrame.appendChild(experienceDate);
-    
-            
-    
-            // contentFrame를 experienceContainer에 추가
-            experienceContainer.appendChild(contentFrame);
+
+             // 마지막 항목이 아니면 timeline 추가
+    if (index !== data.workExpList.length - 1) {
+        const timeline = document.createElement("div");
+        timeline.classList.add("timeline");
+        contentFrame.appendChild(timeline);
+    }
+            // 회사명
+            const companyName = document.createElement("p");
+            companyName.classList.add("content-1");
+            companyName.textContent = workExp.company_name || "Unknown Company";
+            contentFrame.appendChild(companyName);
+        
+            // 직책
+            const jobTitle = document.createElement("p");
+            jobTitle.classList.add("content-1");
+            jobTitle.textContent = workExp.job_title || "Unknown Job Title";
+            contentFrame.appendChild(jobTitle);
+        
+            // 업무 내용
+            const responsibilities = document.createElement("p");
+            responsibilities.classList.add("content-1");
+            responsibilities.textContent = workExp.responsibilities || "No responsibilities listed.";
+            contentFrame.appendChild(responsibilities);
+        
+            // 날짜 정보는 miniframe에 넣기
+            const miniframe = document.createElement("div");
+            miniframe.classList.add("miniframe");
+        
+            // 기간 (시작일 - 종료일)
+            const workPeriod = document.createElement("p");
+            workPeriod.classList.add("content-4");
+            workPeriod.textContent = `${workExp.from_date || "Start Date"} - ${workExp.to_now === "1" ? "재직중" : workExp.to_date || "End Date"}`;
+            miniframe.appendChild(workPeriod);
+        
+            // miniframe을 contentFrame에 추가
+            contentFrame.appendChild(miniframe);
+        
+            // 최종적으로 workExperienceContainer에 contentFrame을 추가
+            workExperienceContainer.appendChild(contentFrame);
         });
+        
     
-        // main-container에 experienceContainer 추가
-        const portfolioContainer = document.querySelector(".main-container[name='portfolio-container']");
-        if (portfolioContainer) {
-            portfolioContainer.appendChild(experienceContainer);
-        }
+        portfolioContainer.appendChild(workExperienceContainer);
     }
     
-
     // Skills 섹션 생성
     function createSkillsSection(data) {
-        // 만약 data.s_name이 비어 있으면 함수를 종료
-        if (!data.s_name || data.s_name.length === 0) return;
-    
+        // 만약 data.skills.name이 비어 있으면 함수를 종료
+        if (!data.skills || !data.skills.name || data.skills.name.length === 0) return;
+
         const skillsContainer = document.createElement("div");
         skillsContainer.classList.add("content-container");
         skillsContainer.setAttribute("name", "skill");
-    
+
         const title = document.createElement("h2");
         title.classList.add("content-head");
         title.textContent = "/ Skills /";
         skillsContainer.appendChild(title);
-    
-        // data.s_name 배열을 순회하면서 각 항목을 추가
-        data.s_name.forEach((name, index) => {
+
+        data.skills.name.forEach((name, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
-    
-            // 기술 이미지와 이름을 추가
+
             const skillContainer = document.createElement("div");
             skillContainer.classList.add("skill-container");
-    const levelImg = document.createElement("img");
+
+            const levelImg = document.createElement("img");
             levelImg.classList.add("svg");
-            // 이미지 URL은 기본값으로 설정하거나 s_name에 맞는 이미지를 설정
-            levelImg.setAttribute("src", data.s_level[index] ? `img/${data.s_level[index]}.png` : "img/level_2.png"); 
+            levelImg.setAttribute("src", data.skills.level[index] ? `img/${data.skills.level[index]}.png` : "img/level_2.png");
             skillContainer.appendChild(levelImg);
-            // 기술 이미지는 name 값에 맞는 이미지를 선택
+
             const skillImg = document.createElement("img");
             skillImg.classList.add("skill-img");
-            // 이미지 URL은 기본값으로 설정하거나 s_name에 맞는 이미지를 설정
-            skillImg.setAttribute("src",name ? `img/${name}.png` : "img/java.png"); 
+            skillImg.setAttribute("src", name ? `img/${name}.png` : "img/java.png");
             skillContainer.appendChild(skillImg);
 
-            
-    
-            // 기술 설명
             const skillText = document.createElement("p");
             skillText.classList.add("skill-txt");
-            skillText.textContent = data.s_introduce[index] || "기술에 대한 설명이 없습니다.";
+            skillText.textContent = data.skills.introduce[index] || "기술에 대한 설명이 없습니다.";
+            skillContainer.appendChild(skillText);
+
             contentFrame.appendChild(skillContainer);
-            contentFrame.appendChild(skillText);
-    
-           
-    
-            // contentFrame를 skillsContainer에 추가
             skillsContainer.appendChild(contentFrame);
         });
-    
-        // main-container에 skillsContainer 추가
-        const portfolioContainer = document.querySelector(".main-container[name='portfolio-container']");
-        if (portfolioContainer) {
-            portfolioContainer.appendChild(skillsContainer);
-        }
-    }
-    
 
-    // 각 섹션 생성 함수 호출
+        portfolioContainer.appendChild(skillsContainer);
+    }
+
+    // 호출
     createIntroSection(allData);
     createEducationSection(allData);
+    createLicenseSection(allData);
     createAwardsSection(allData);
     createExperienceSection(allData);
-
+    createAcaActSection(allData);
+    createWorkExperienceSection(allData);
     createSkillsSection(allData);
 });
-
