@@ -22,7 +22,8 @@ public class Resume {
     @Column
     private Long id;
 
-    @OneToOne
+    //Owner와 phoneNumber는 고정값. - 수정 페이지에서 제공하지 않음.
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="owner_email")
     private User owner;
 
@@ -31,14 +32,13 @@ public class Resume {
 //    @Column(name = "color_scheme", nullable = false)
 //    private Long colorScheme;
 
-    @Column(name = "phone_number", unique = true)
-    private String phoneNumber;
 
-    // foreign key photo_id references resume_photos(id)
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "photo_id")
     private ResumePhoto resumePhoto;
 
+
+    // Automatic auditing되는 컬럼. 신경 X
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -48,30 +48,29 @@ public class Resume {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Resume(String phoneNumber, User owner) {
-        this.phoneNumber = phoneNumber;
+    public Resume( User owner) {
         this.owner = owner;
     }
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<Education> educations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<Award> awards = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<EducationalExp> eduExps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<AcademicActivity> academicActivities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<WorkExp> workExps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume")
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
     private List<License> licenses = new ArrayList<>();
 
 }

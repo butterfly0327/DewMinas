@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!allData) return;
 
     const portfolioContainer = document.querySelector(".main-container[name='portfolio-container']");
-
+    console.log(allData);
     // Intro 섹션 생성
     function createIntroSection(data) {
         const introContainer = document.createElement("div");

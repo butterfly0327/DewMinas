@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity(name = "projects")
-public class Project extends CommonDateField implements Summarizable {
+public class Project extends CommonDateField {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

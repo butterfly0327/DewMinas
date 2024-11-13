@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity(name = "academic_activities")
-public class AcademicActivity implements Summarizable, Updatable{
+public class AcademicActivity implements Updatable<AcademicActivitySummary>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -46,25 +46,40 @@ public class AcademicActivity implements Summarizable, Updatable{
     }
 
     @Override
-    public boolean updateData(Specifiable summary) {
-        AcademicActivitySummary activitySummary = (AcademicActivitySummary) summary;
+    public boolean updateData(AcademicActivitySummary summary) {
         boolean res = false;
 
-        if(!this.activityName.equals(activitySummary.getActivityName())) {
-            this.activityName = activitySummary.getActivityName(); res = true;
+        if(!this.activityName.equals(summary.getActivityName())) {
+            this.activityName = summary.getActivityName(); res = true;
         }
-        if(!this.activityDate.equals(activitySummary.getActivityDate())) {
+        if(!this.activityDate.equals(summary.getActivityDate())) {
             this.activityDate = LocalDateTime.of(
-                    activitySummary.getActivityDate().toLocalDate(),
-                    activitySummary.getActivityDate().toLocalTime()); res = true;
+                    summary.getActivityDate().toLocalDate(),
+                    summary.getActivityDate().toLocalTime()); res = true;
         }
-        if(!this.institutionName.equals(activitySummary.getInstitutionName())) {
-            this.institutionName = activitySummary.getInstitutionName();  res = true;
+        if(!this.institutionName.equals(summary.getInstitutionName())) {
+            this.institutionName = summary.getInstitutionName();  res = true;
         }
-        if(!this.conferenceName.equals(activitySummary.getConferenceName())) {
-            this.conferenceName = activitySummary.getConferenceName(); res = true;
+        if(!this.conferenceName.equals(summary.getConferenceName())) {
+            this.conferenceName = summary.getConferenceName(); res = true;
         }
 
         return res;
+    }
+
+    @Override
+    public boolean isDifferentWith(Object o) {
+        AcademicActivity other = (AcademicActivity) o;
+        return !(this.activityName.equals(other.getActivityName())
+        && this.activityDate.equals(other.getActivityDate())
+        && this.institutionName.equals(other.getInstitutionName())
+        && this.conferenceName.equals(other.getConferenceName()));
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean equals(Object obj) {
+        if(!(obj instanceof AcademicActivity)) return false;
+        Updatable up = (Updatable)obj;
+        return up.getId().equals(this.id);
     }
 }

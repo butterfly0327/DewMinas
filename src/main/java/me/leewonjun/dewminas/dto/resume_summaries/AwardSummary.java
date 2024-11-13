@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.Award;
-import me.leewonjun.dewminas.domains.Summarizable;
+import me.leewonjun.dewminas.domains.Updatable;
 
+import javax.security.auth.callback.LanguageCallback;
 import java.time.LocalDateTime;
 
 @Getter
@@ -28,8 +29,15 @@ public class AwardSummary implements Specifiable{
         this.id = award.getId();
     }
 
+    public AwardSummary(String awardName, String competitionName, String organizationName, LocalDateTime awardedDate) {
+        this.awardName = awardName;
+        this.competitionName = competitionName;
+        this.awardedDate = awardedDate;
+        this.organizationName = organizationName;
+    }
+
     @Override
-    public Summarizable specify() {
+    public Updatable<AwardSummary> specify() {
         return Award.builder()
                 .awardedDate(this.awardedDate)
                 .competitionName(this.competitionName)

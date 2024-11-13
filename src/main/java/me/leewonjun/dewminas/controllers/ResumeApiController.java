@@ -38,13 +38,15 @@ public class ResumeApiController {
     }
 
     @PutMapping("/api/resume/{id}")
-    public ResponseEntity updateResume(@PathVariable(name = "id") Long id, @RequestBody UpdateResumeRequest request) {
-        resumeService.updateResume(id, request);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<ResumeResponse> updateResume(@PathVariable(name = "id") Long id, @RequestBody UpdateResumeRequest request) {
+        resumeService.updateResumeBeforeFlush(id, request);
+        String ownerEmail = resumeService.getOwnerEmailById(id);
+        ResumeResponse response = new ResumeResponse(resumeService.findResume(ownerEmail));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/api/resume/{email}")
-    public ResponseEntity deleteResume(@PathVariable(name = "email") String email) {
+    public ResponseEntity<Object> deleteResume(@PathVariable(name = "email") String email) {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

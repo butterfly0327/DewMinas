@@ -15,14 +15,14 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity(name="educations")
-public class Education extends CommonDateField implements Summarizable, Updatable{
+public class Education extends CommonDateField implements Updatable<EducationSummary>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "type", nullable = false)
-    private Short type; // 교육기관 타입 : 고교, 대학 = GPA 출력 여부 결정
+    private int type; // 교육기관 타입 : 고교, 대학 = GPA 출력 여부 결정
 
     @Column(name="institution_name", nullable = false)
     private String institutionName;
@@ -40,7 +40,7 @@ public class Education extends CommonDateField implements Summarizable, Updatabl
     private Double maxGpa;
 
     @Column(name="status")
-    private Short status; // 학적 - 중퇴 = 0, 재학 = 1, 휴학 = 2, 졸업 = 3, 졸업 예정 = 4;
+    private int status; // 학적 - 중퇴 = 0, 재학 = 1, 휴학 = 2, 졸업 = 3, 졸업 예정 = 4;
 
     @Column(name = "to_now", nullable = false)
     private Boolean toNow;
@@ -50,7 +50,7 @@ public class Education extends CommonDateField implements Summarizable, Updatabl
     private Resume resume;
 
     @Builder
-    public Education(Short type, String institutionName, String major, String degree, Double gpa, Short status,
+    public Education(int type, String institutionName, String major, String degree, Double gpa, int status,
                      Double maxGpa, LocalDateTime fromDate, LocalDateTime toDate, Boolean toNow, Resume resume) {
         this.type = type;
         this.status = status;
@@ -65,8 +65,7 @@ public class Education extends CommonDateField implements Summarizable, Updatabl
     }
 
     @Override
-    public boolean updateData(Specifiable summary) {
-        EducationSummary educationSummary = (EducationSummary) summary;
+    public boolean updateData(EducationSummary educationSummary) {
         boolean res = false;
 
         if(this.type != educationSummary.getType()) {
@@ -78,10 +77,10 @@ public class Education extends CommonDateField implements Summarizable, Updatabl
         if(!this.institutionName.equals(educationSummary.getInstitutionName())){
             this.institutionName = educationSummary.getInstitutionName(); res = true;
         }
-        if(this.major.equals(educationSummary.getMajor())) {
+        if(!this.major.equals(educationSummary.getMajor())) {
             this.major = educationSummary.getMajor(); res = true;
         }
-        if(this.degree.equals(educationSummary.getDegree())){
+        if(!this.degree.equals(educationSummary.getDegree())){
             this.degree = educationSummary.getDegree(); res = true;
         }
         if(this.gpa != educationSummary.getGpa()) {
@@ -102,9 +101,31 @@ public class Education extends CommonDateField implements Summarizable, Updatabl
                     educationSummary.getFromDate().toLocalTime()
             ); res = true;
         }
-        if(this.toNow != educationSummary.isToNow()) {
-            this.toNow = educationSummary.isToNow(); res = true;
+        if(this.toNow != educationSummary.getToNow()) {
+            this.toNow = educationSummary.getToNow(); res = true;
         }
         return res;
+    }
+
+    @Override
+    public boolean isDifferentWith(Object o) {
+        Education other = (Education) o;
+        return !(this.type == other.getType()
+                && this.status == other.getStatus()
+                && this.institutionName.equals(other.getInstitutionName())
+                && this.major.equals(other.getMajor())
+                && this.gpa.equals(other.getGpa())
+                && this.maxGpa.equals(other.getMaxGpa())
+                && this.degree.equals(other.getDegree())
+                && this.fromDate.toLocalDate().equals(other.getFromDate().toLocalDate())
+                && this.toDate.toLocalDate().equals(other.getToDate().toLocalDate())
+                && this.toNow.equals(other.getToNow()));
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Education)) return false;
+        Updatable up = (Updatable)obj;
+        return up.getId().equals(this.id);
     }
 }

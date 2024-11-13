@@ -38,14 +38,17 @@ public class User
     @Column(updatable = false, nullable = false)
     private String password;
 
+    @Column(name = "phone_number",  nullable = false)
+    private  String phoneNumber;
 
     @Builder
-    public User(String nameKor, String nameEng, String nickname, String email, String password) {
+    public User(String nameKor, String nameEng, String nickname, String email, String password, String phoneNumber) {
         this.nameKor = nameKor;
         this.nameEng = nameEng;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
 //    @Override
@@ -86,5 +89,11 @@ public class User
     //Update transaction
     public void changeNickname(String newName) {
         this.nickname = newName;
+    }
+
+    public boolean equals(Object o) {
+        User other = (User)o;
+        if(other == null) throw new NullPointerException();
+        return other.getId().equals(this.id);
     }
 }

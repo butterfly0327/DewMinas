@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity(name = "educational_exp")
-public class EducationalExp extends CommonDateField implements Summarizable, Updatable {
+public class EducationalExp extends CommonDateField implements Updatable<EducationalExpSummary> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -46,9 +46,46 @@ public class EducationalExp extends CommonDateField implements Summarizable, Upd
     }
 
     @Override
-    public boolean updateData(Specifiable summary) {
+    public boolean updateData(EducationalExpSummary expSummary) {
         boolean res = false;
-        EducationalExpSummary expSummary = (EducationalExpSummary) summary;
+        if(!this.educationName.equals(expSummary.getEducationName())) {
+            this.educationName = expSummary.getEducationName(); res = true;
+        }
+        if(!this.organizationName.equals(expSummary.getOrganizationName())) {
+            this.organizationName = expSummary.getOrganizationName(); res = true;
+        }
+        if(!this.fromDate.equals(expSummary.getFromDate())) {
+            this.fromDate = LocalDateTime.of(
+                    expSummary.getFromDate().toLocalDate(),
+                    expSummary.getFromDate().toLocalTime()
+            ); res = true;
+        }
+        if(!this.toDate.equals(expSummary.getToDate())) {
+            this.toDate = LocalDateTime.of(
+                    expSummary.getToDate().toLocalDate(),
+                    expSummary.getFromDate().toLocalTime()
+            ); res = true;
+        }
+        if(this.toNow != expSummary.getToNow()) {
+            this.toNow = expSummary.getToNow(); res = true;
+        }
         return res;
+    }
+
+    @Override
+    public boolean isDifferentWith(Object o) {
+        EducationalExp other = (EducationalExp) o;
+        return !(this.educationName.equals(other.getEducationName())
+                && this.organizationName.equals(other.getOrganizationName())
+                && this.fromDate.toLocalDate().equals(other.getFromDate().toLocalDate())
+                && this.toDate.toLocalDate().equals(other.getToDate().toLocalDate())
+                && this.toNow.equals(other.getToNow()));
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean equals(Object obj) {
+        if(!(obj instanceof EducationalExp)) return false;
+        Updatable up = (Updatable)obj;
+        return up.getId().equals(this.id);
     }
 }

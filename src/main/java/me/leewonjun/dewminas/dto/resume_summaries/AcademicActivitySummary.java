@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.AcademicActivity;
-import me.leewonjun.dewminas.domains.Summarizable;
+import me.leewonjun.dewminas.domains.Updatable;
 
 import java.time.LocalDateTime;
 
@@ -28,8 +28,15 @@ public class AcademicActivitySummary implements Specifiable {
         this.id = activity.getId();
     }
 
+    public AcademicActivitySummary(String activityName, String institutionName, String conferenceName, LocalDateTime activityDate) {
+        this.activityDate = activityDate;
+        this.activityName = activityName;
+        this.institutionName= institutionName;
+        this.conferenceName = conferenceName;
+    }
+
     @Override
-    public Summarizable specify() {
+    public Updatable<AcademicActivitySummary> specify() {
         return AcademicActivity.builder()
                 .activityName(this.activityName)
                 .conferenceName(this.conferenceName)
@@ -37,4 +44,5 @@ public class AcademicActivitySummary implements Specifiable {
                 .academicInstitution(this.institutionName)
                 .build();
     }
+
 }

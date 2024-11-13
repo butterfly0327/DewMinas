@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.License;
-import me.leewonjun.dewminas.domains.Summarizable;
+import me.leewonjun.dewminas.domains.Updatable;
 
 import java.time.LocalDateTime;
 
@@ -15,21 +15,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LicenseSummary implements Specifiable{
     private Long id;
-    private String name; // 자격증 명
+    private String licenseName; // 자격증 명
     private String organizationName;
     private LocalDateTime issuedAt;
 
     public LicenseSummary(License license) {
         this.id = license.getId();
-        this.name = license.getName();
+        this.licenseName = license.getLicenseName();
         this.organizationName = license.getOrganizationName();
         this.issuedAt = license.getIssuedAt();
     }
 
+    public LicenseSummary(String licenseName, String organizationName, LocalDateTime issuedAt) {
+        this.licenseName = licenseName;
+        this.organizationName = organizationName;
+        this.issuedAt = issuedAt;
+    }
+
     @Override
-    public Summarizable specify() {
+    public Updatable<LicenseSummary> specify() {
         return License.builder()
-                .name(this.name)
+                .licenseName(this.licenseName)
                 .organizationName(this.organizationName)
                 .issuedAt(this.issuedAt)
                 .build();

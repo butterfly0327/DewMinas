@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.EducationalExp;
-import me.leewonjun.dewminas.domains.Summarizable;
+import me.leewonjun.dewminas.domains.Updatable;
 
 import java.time.LocalDateTime;
 
@@ -30,8 +30,16 @@ public class EducationalExpSummary implements Specifiable{
         this.id = exp.getId();
     }
 
+    public EducationalExpSummary(String educationName, String organizationName, LocalDateTime fromDate, LocalDateTime toDate, boolean toNow) {
+        this.educationName = educationName;
+        this.organizationName = organizationName;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.toNow = toNow;
+    }
+
     @Override
-    public Summarizable specify() {
+    public Updatable<EducationalExpSummary> specify() {
         return EducationalExp.builder()
                 .educationName(this.educationName)
                 .organizationName(this.organizationName)

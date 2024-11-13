@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity(name = "awards")
-public class Award implements Summarizable, Updatable {
+public class Award implements Updatable<AwardSummary> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -46,9 +46,8 @@ public class Award implements Summarizable, Updatable {
     }
 
     @Override
-    public boolean updateData(Specifiable summary) {
+    public boolean updateData(AwardSummary awardSummary) {
         boolean res = false;
-        AwardSummary awardSummary = (AwardSummary) summary;
         if(!this.awardName.equals(awardSummary.getAwardName())) {
             this.awardName = awardSummary.getAwardName(); res = true;
         }
@@ -63,5 +62,21 @@ public class Award implements Summarizable, Updatable {
                                                 awardSummary.getAwardedDate().toLocalTime()); res = true;
         }
         return res;
+    }
+
+    @Override
+    public boolean isDifferentWith(Object o) {
+        Award other = (Award) o;
+        return !(this.awardName.equals(other.getAwardName())
+                && this.competitionName.equals(other.getCompetitionName())
+                && this.organizationName.equals(other.getOrganizationName())
+                && this.awardedDate.toLocalDate().equals(other.getAwardedDate().toLocalDate()));
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Award)) return false;
+        Updatable up = (Updatable)obj;
+        return up.getId().equals(this.id);
     }
 }

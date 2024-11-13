@@ -22,8 +22,10 @@ public class ResumeResponse {
     private String email;
     private String phoneNumber;
     private String profilePhotoUrl;
+    private String desiredPosition;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private List<LicenseSummary> licenseList;
     private List<EducationSummary> educationList;
     private List<AwardSummary> awardList;
     private List<EducationalExpSummary> eduExpList;
@@ -35,8 +37,8 @@ public class ResumeResponse {
     public ResumeResponse(Resume resume) {
         this.resumeId = resume.getId();
         this.email = resume.getOwner().getEmail();
-        this.phoneNumber = resume.getPhoneNumber();
-
+        this.phoneNumber = resume.getOwner().getPhoneNumber();
+        this.desiredPosition = resume.getDesiredPosition();
         this.createdAt = resume.getCreatedAt();
         this.updatedAt = resume.getUpdatedAt();
 
@@ -46,7 +48,7 @@ public class ResumeResponse {
         this.eduExpList = (resume.getEduExps() != null ? resume.getEduExps().stream().map(EducationalExpSummary::new).collect(Collectors.toList()) : null);
         this.acaActList = (resume.getAcademicActivities() != null ? resume.getAcademicActivities().stream().map(AcademicActivitySummary::new).collect(Collectors.toList()) : null);
         this.workExpList = (resume.getWorkExps() != null ? resume.getWorkExps().stream().map(WorkExpSummary::new).collect(Collectors.toList()) : null);
-
+        this.licenseList = (resume.getLicenses() != null ? resume.getLicenses().stream().map(LicenseSummary::new).collect(Collectors.toList()) : null);
         this.projects = (resume.getProjects() != null) ? (resume.getProjects().stream().map(ProjectSummary::new).collect(Collectors.toList())) : null;
     }
 

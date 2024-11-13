@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.leewonjun.dewminas.domains.Summarizable;
+import me.leewonjun.dewminas.domains.Updatable;
 import me.leewonjun.dewminas.domains.WorkExp;
 
 import java.time.LocalDateTime;
@@ -29,9 +29,15 @@ public class WorkExpSummary implements Specifiable {
         this.toNow = exp.getToNow();
         this.id = exp.getId();
     }
-
+    public WorkExpSummary(String companyName, String jobTitle, LocalDateTime fromDate, LocalDateTime toDate, boolean toNow) {
+        this.companyName = companyName;
+        this.jobTitle = jobTitle;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.toNow = toNow;
+    }
     @Override
-    public Summarizable specify() {
+    public Updatable<WorkExpSummary> specify() {
         return WorkExp.builder()
                 .companyName(this.companyName)
                 .jobTitle(this.jobTitle)
