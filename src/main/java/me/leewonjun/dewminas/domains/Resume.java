@@ -23,7 +23,7 @@ public class Resume {
     private Long id;
 
     //Owner와 phoneNumber는 고정값. - 수정 페이지에서 제공하지 않음.
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="owner_email")
     private User owner;
 
@@ -33,7 +33,7 @@ public class Resume {
 //    private Long colorScheme;
 
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "photo_id")
     private ResumePhoto resumePhoto;
 
@@ -52,25 +52,25 @@ public class Resume {
         this.owner = owner;
     }
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<Education> educations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<Award> awards = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<EducationalExp> eduExps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<AcademicActivity> academicActivities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<WorkExp> workExps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY)
     private List<License> licenses = new ArrayList<>();
 
 }

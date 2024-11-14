@@ -3,8 +3,7 @@ package me.leewonjun.dewminas;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import jakarta.transaction.Transactional;
-import me.leewonjun.dewminas.domains.Resume;
-import me.leewonjun.dewminas.domains.User;
+import me.leewonjun.dewminas.domains.*;
 import me.leewonjun.dewminas.dto.RegisterResumeRequest;
 import me.leewonjun.dewminas.dto.UpdateResumeRequest;
 import me.leewonjun.dewminas.dto.resume_summaries.*;
@@ -83,12 +82,19 @@ public class ResumeApiTest {
     @BeforeEach
     public void mockSetUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        academicActivityRepository.deleteAll();
+        awardRepository.deleteAll();
+        educationRepository.deleteAll();
+        educationalExpRepository.deleteAll();
+        licenseRepository.deleteAll();
+        workExpRepository.deleteAll();
         resumeRepository.deleteAll();
         userRepository.deleteAll();
     }
 
     @DisplayName("postResume() : 이력서 등록에 성공한다.")
     @Test
+    @Transactional
     public void postingTest() throws Exception{
         // given : 유저 데이터 저장, 이력서 정보 post
 
@@ -136,13 +142,14 @@ public class ResumeApiTest {
 
     @DisplayName("updateResume() #1 : 이력서 정보 추가에 성공한다.")
     @Test
+    @Transactional
     public void appendInformation() throws Exception {
         // given : 유저 생성, 이력서 생성, 추가할 정보 생성
         String url = src+"/{id}";
 
         String pnum = "01034422631";
         User owner = userRepository.save(User.builder().nameEng("Lee").phoneNumber(pnum).nameKor("이원준").nickname("tester").password("123").email("mail@gmail.com").build());
-        Long resumeId = resumeRepository.save(Resume.builder().owner(owner).build()).getId();
+        Resume resume = resumeRepository.save(Resume.builder().owner(owner).build());
         List<EducationSummary> eduSums = new ArrayList<>();
         List<LicenseSummary> licenseSums = new ArrayList<>();
         List<AwardSummary> awardSums = new ArrayList<>();
@@ -171,12 +178,13 @@ public class ResumeApiTest {
 
         UpdateResumeRequest request = new UpdateResumeRequest(desiredPos, eduSums, licenseSums, awardSums, acaSums, eduExpSums, workSums);
         // when
-        mockMvc.perform(put(url, resumeId)
+        mockMvc.perform(put(url, resume.getId())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(request))
                 .accept(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
-
+        //resumeRepository.flush();
+        // fetch를 FetchType.EAGER로 변경하면 통과한다. 그런데 왜인지 모르겠다.
         // then
         Resume newResume = resumeRepository.findByOwner(owner).orElse(null);
 
@@ -184,23 +192,51 @@ public class ResumeApiTest {
         Assertions.assertThat(newResume.getOwner()).isEqualTo(owner);
         Assertions.assertThat(newResume.getDesiredPosition()).isEqualTo(desiredPos);
 
-        Assertions.assertThat(newResume.getAwards().size()).isOne();
-        Assertions.assertThat(newResume.getAwards().get(0).isDifferentWith(awardSums.get(0).specify())).isFalse();
+        //
+//
+//        Assertions.assertThat(newResume.getAwards().size()).isOne();
+//        Assertions.assertThat(newResume.getAwards().get(0).isDifferentWith(awardSums.get(0).specify())).isFalse();
+//
+//        Assertions.assertThat(newResume.getAcademicActivities().size()).isOne();
+//        Assertions.assertThat(newResume.getAcademicActivities().get(0).isDifferentWith(acaSums.get(0).specify())).isFalse();
+//
+//        Assertions.assertThat(newResume.getEducations().size()).isOne();
+//        Assertions.assertThat(newResume.getEducations().get(0).isDifferentWith(eduSums.get(0).specify())).isFalse();
+//
+//        Assertions.assertThat(newResume.getEduExps().size()).isOne();
+//        Assertions.assertThat(newResume.getEduExps().get(0).isDifferentWith(eduExpSums.get(0).specify())).isFalse();
+//
+//        Assertions.assertThat(newResume.getLicenses().size()).isOne();
+//        Assertions.assertThat(newResume.getLicenses().get(0).isDifferentWith(licenseSums.get(0).specify())).isFalse();
+//
+//        Assertions.assertThat(newResume.getWorkExps().size()).isOne();
+//        Assertions.assertThat(newResume.getWorkExps().get(0).isDifferentWith(workSums.get(0).specify())).isFalse();
 
-        Assertions.assertThat(newResume.getAcademicActivities().size()).isOne();
-        Assertions.assertThat(newResume.getAcademicActivities().get(0).isDifferentWith(acaSums.get(0).specify())).isFalse();
+        List<Education> educations = educationRepository.findByResume(resume);
+        List<Award> awards = awardRepository.findByResume(resume);
+        List<EducationalExp> educationalExps = educationalExpRepository.findByResume(resume);
+        List<AcademicActivity> academicActivities = academicActivityRepository.findByResume(resume);
+        List<License> licenses = licenseRepository.findByResume(resume);
+        List<WorkExp> workExps = workExpRepository.findByResume(resume);
 
-        Assertions.assertThat(newResume.getEducations().size()).isOne();
-        Assertions.assertThat(newResume.getEducations().get(0).isDifferentWith(eduSums.get(0).specify())).isFalse();
+        Assertions.assertThat(educations.size()).isOne();
+        Assertions.assertThat(educations.get(0).isDifferentWith(eduSums.get(0).specify())).isFalse();
 
-        Assertions.assertThat(newResume.getEduExps().size()).isOne();
-        Assertions.assertThat(newResume.getEduExps().get(0).isDifferentWith(eduExpSums.get(0).specify())).isFalse();
+        Assertions.assertThat(awards.size()).isOne();
+        Assertions.assertThat(awards.get(0).isDifferentWith(awardSums.get(0).specify())).isFalse();
 
-        Assertions.assertThat(newResume.getLicenses().size()).isOne();
-        Assertions.assertThat(newResume.getLicenses().get(0).isDifferentWith(licenseSums.get(0).specify())).isFalse();
+        Assertions.assertThat(educationalExps.size()).isOne();
+        Assertions.assertThat(educationalExps.get(0).isDifferentWith(eduExpSums.get(0).specify())).isFalse();
 
-        Assertions.assertThat(newResume.getWorkExps().size()).isOne();
-        Assertions.assertThat(newResume.getWorkExps().get(0).isDifferentWith(workSums.get(0).specify())).isFalse();
+        Assertions.assertThat(academicActivities.size()).isOne();
+        Assertions.assertThat(academicActivities.get(0).isDifferentWith(acaSums.get(0).specify())).isFalse();
+
+        Assertions.assertThat(licenses.size()).isOne();
+        Assertions.assertThat(licenses.get(0).isDifferentWith(licenseSums.get(0).specify())).isFalse();
+
+        Assertions.assertThat(workExps.size()).isOne();
+        Assertions.assertThat(workExps.get(0).isDifferentWith(workSums.get(0).specify())).isFalse();
+
     }
 
     @DisplayName("updateResume() #2 : 이력서 정보 수정에 성공한다.")
