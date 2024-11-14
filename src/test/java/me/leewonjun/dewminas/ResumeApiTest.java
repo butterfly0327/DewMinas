@@ -1,14 +1,12 @@
 package me.leewonjun.dewminas;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import jakarta.transaction.Transactional;
 import me.leewonjun.dewminas.domains.*;
 import me.leewonjun.dewminas.dto.RegisterResumeRequest;
 import me.leewonjun.dewminas.dto.UpdateResumeRequest;
 import me.leewonjun.dewminas.dto.resume_summaries.*;
 import me.leewonjun.dewminas.repositories.*;
-import net.bytebuddy.utility.dispatcher.JavaDispatcher;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,23 +14,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.swing.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -241,7 +233,132 @@ public class ResumeApiTest {
 
     @DisplayName("updateResume() #2 : 이력서 정보 수정에 성공한다.")
     @Test
-    public void updateInformation() {
+    @Transactional
+    public void updateInformation() throws Exception {
+        // given : 유저 생성, 이력서 생성, 추가할 정보 생성
+        String url = src+"/{id}";
 
+        String pnum = "01034422631";
+        User owner = userRepository.save(User.builder().nameEng("Lee").phoneNumber(pnum).nameKor("이원준").nickname("tester").password("123").email("mail@gmail.com").build());
+        Resume resume = resumeRepository.save(Resume.builder().owner(owner).build());
+        List<EducationSummary> eduSums = new ArrayList<>();
+        List<LicenseSummary> licenseSums = new ArrayList<>();
+        List<AwardSummary> awardSums = new ArrayList<>();
+        List<AcademicActivitySummary> acaSums = new ArrayList<>();
+        List<EducationalExpSummary> eduExpSums = new ArrayList<>();
+        List<WorkExpSummary> workSums = new ArrayList<>();
+        String desiredPos = "Back-end developer";
+        {
+            // 정보 입력 스코프
+            eduSums.add(new EducationSummary(0, "동의대학교", "컴퓨터공학과", "학사", 4.49, 4.5,
+                    LocalDateTime.of(2014, java.time.Month.of(3), 2, 0, 0, 0),
+                    LocalDateTime.of(2024, java.time.Month.of(3), 14, 0, 0, 0), true, 4));
+            licenseSums.add(new LicenseSummary("정보처리기사", "산업인력공단",
+                    LocalDateTime.of(2024, java.time.Month.of(6), 11, 0, 0, 0)));
+            awardSums.add(new AwardSummary("우수상", "캡스톤디자인 경진대회", "동의대 LINC+사업단",
+                    LocalDateTime.of(2024, java.time.Month.of(8), 20, 0, 0, 0)));
+            eduExpSums.add(new EducationalExpSummary("SSAFY", "고용노동부",
+                    LocalDateTime.of(2025, java.time.Month.of(1), 1, 0, 0, 0)
+                    ,LocalDateTime.of(2024, java.time.Month.of(12), 31, 0, 0, 0), true ));
+            acaSums.add(new AcademicActivitySummary("횡단보도 사각 보조 시스템 논문발표", "한국정보기술학회", "추계종합학술대회",
+                    LocalDateTime.of(2024, java.time.Month.of(11), 22, 13, 32, 0)));
+            workSums.add(new WorkExpSummary("네이버", "개발팀장",
+                    LocalDateTime.of(2025,java.time.Month.of(3), 1, 0 ,0 ,0),
+                    LocalDateTime.of(2025, java.time.Month.of(12), 3, 0, 0, 0), true));
+        }
+
+        UpdateResumeRequest request = new UpdateResumeRequest(desiredPos, eduSums, licenseSums, awardSums, acaSums, eduExpSums, workSums);
+        // when
+        mockMvc.perform(put(url, resume.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(request))
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+        request.setLicenses(new ArrayList<>()); // license 엔티티는 삭제
+        request.getWorkExps().add(new WorkExpSummary("부산은행", "전자 결제 시스템 개발팀원",
+                LocalDateTime.of(2023,java.time.Month.of(1), 1, 0, 0, 0),
+                LocalDateTime.of(2024, java.time.Month.of(2), 1, 0, 0, 0),
+                false));
+        request.getAwards().get(0).setAwardName("대상");
+        request.getAwards().get(0).setOrganizationName("서울대학교");
+        request.getAwards().get(0).setCompetitionName("전국 프로그래밍 경진대회");
+
+        request.getAwards().get(0).setId(1L);
+        request.getAcademicActivities().get(0).setId(1L);
+        request.getEducations().get(0).setId(1L);
+        request.getEduExps().get(0).setId(1L);
+        request.getWorkExps().get(0).setId(1L);
+
+        mockMvc.perform(put(url, resume.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(request))
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+        // then 변화한 데이터 확인. license 엔티티 = 0, award 변화, workExp 변화
+        Award updatedAward = (Award) request.getAwards().get(0).specify(), awardFromDB = awardRepository.findByResume(resume).get(0);
+        WorkExp newWorkExp = (WorkExp) request.getWorkExps().get(1).specify(), workExpFromDB = workExpRepository.findByCompanyName("부산은행").get(0);
+
+        Assertions.assertThat(licenseRepository.count()).isZero();
+        Assertions.assertThat(updatedAward.isDifferentWith(awardFromDB)).isFalse();
+        Assertions.assertThat(workExpRepository.count()).isEqualTo(2L);
+        Assertions.assertThat(newWorkExp.isDifferentWith(workExpFromDB)).isFalse();
+    }
+
+    @DisplayName("deleteResume() : 이력서 및 세부 정보 삭제에 성공한다.")
+    @Test
+    public void deleteResumeTest()  throws Exception{
+        // given : 유저 생성, 이력서 생성, 추가할 정보 생성
+        String url = src+"/{id}";
+
+        String pnum = "01034422631";
+        User owner = userRepository.save(User.builder().nameEng("Lee").phoneNumber(pnum).nameKor("이원준").nickname("tester").password("123").email("mail@gmail.com").build());
+        Resume resume = resumeRepository.save(Resume.builder().owner(owner).build());
+        List<EducationSummary> eduSums = new ArrayList<>();
+        List<LicenseSummary> licenseSums = new ArrayList<>();
+        List<AwardSummary> awardSums = new ArrayList<>();
+        List<AcademicActivitySummary> acaSums = new ArrayList<>();
+        List<EducationalExpSummary> eduExpSums = new ArrayList<>();
+        List<WorkExpSummary> workSums = new ArrayList<>();
+        String desiredPos = "Back-end developer";
+        {
+            // 정보 입력 스코프
+            eduSums.add(new EducationSummary(0, "동의대학교", "컴퓨터공학과", "학사", 4.49, 4.5,
+                    LocalDateTime.of(2014, java.time.Month.of(3), 2, 0, 0, 0),
+                    LocalDateTime.of(2024, java.time.Month.of(3), 14, 0, 0, 0), true, 4));
+            licenseSums.add(new LicenseSummary("정보처리기사", "산업인력공단",
+                    LocalDateTime.of(2024, java.time.Month.of(6), 11, 0, 0, 0)));
+            awardSums.add(new AwardSummary("우수상", "캡스톤디자인 경진대회", "동의대 LINC+사업단",
+                    LocalDateTime.of(2024, java.time.Month.of(8), 20, 0, 0, 0)));
+            eduExpSums.add(new EducationalExpSummary("SSAFY", "고용노동부",
+                    LocalDateTime.of(2025, java.time.Month.of(1), 1, 0, 0, 0)
+                    ,LocalDateTime.of(2024, java.time.Month.of(12), 31, 0, 0, 0), true ));
+            acaSums.add(new AcademicActivitySummary("횡단보도 사각 보조 시스템 논문발표", "한국정보기술학회", "추계종합학술대회",
+                    LocalDateTime.of(2024, java.time.Month.of(11), 22, 13, 32, 0)));
+            workSums.add(new WorkExpSummary("네이버", "개발팀장",
+                    LocalDateTime.of(2025,java.time.Month.of(3), 1, 0 ,0 ,0),
+                    LocalDateTime.of(2025, java.time.Month.of(12), 3, 0, 0, 0), true));
+        }
+
+        UpdateResumeRequest request = new UpdateResumeRequest(desiredPos, eduSums, licenseSums, awardSums, acaSums, eduExpSums, workSums);
+        // when
+        mockMvc.perform(put(url, resume.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(request))
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+        
+        mockMvc.perform(delete(url, owner.getEmail())).andExpect(status().isOk());
+
+        // then 모든 정보 삭제된 것을 검증한다.
+        Assertions.assertThat(resumeRepository.count()).isZero();
+        Assertions.assertThat(academicActivityRepository.count()).isZero();
+        Assertions.assertThat(awardRepository.count()).isZero();
+        Assertions.assertThat(educationRepository.count()).isZero();
+        Assertions.assertThat(educationalExpRepository.count()).isZero();
+        Assertions.assertThat(licenseRepository.count()).isZero();
+        Assertions.assertThat(workExpRepository.count()).isZero();
+        Assertions.assertThat(userRepository.findById(owner.getId()).orElse(null)).isNotNull();
     }
 }

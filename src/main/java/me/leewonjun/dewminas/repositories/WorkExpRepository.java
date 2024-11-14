@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface WorkExpRepository extends JpaRepository<WorkExp, Long> {
     List<WorkExp> findByResume(Resume resume);
+    List<WorkExp> findByCompanyName(String companyName);
+    void deleteAllByResume(Resume resume);
 }

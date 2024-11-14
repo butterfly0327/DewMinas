@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface LicenseRepository extends JpaRepository<License, Long> {
     List<License> findByResume(Resume resume);
+    void deleteAllByResume(Resume resume);
 }

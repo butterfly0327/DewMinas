@@ -29,6 +29,9 @@ public class Project extends CommonDateField {
     @Column(nullable = false)
     private String summary;
 
+    @Column(name = "owner")
+    private String owner;
+
     @ManyToOne
     @JoinColumn(name="resume_id")
     private Resume resume;
@@ -56,10 +59,11 @@ public class Project extends CommonDateField {
     private List<ProjectSource> projectSources = new ArrayList<>();
 
     @Builder
-    public Project(String title, String shortComment, String summary, Resume resume) {
+    public Project(String title, String shortComment, String summary, Resume resume, String ownerMail) {
         this.title = title;
         this.shortComment = shortComment;
         this.summary = summary;
         this.resume = resume;
+        this.owner = ownerMail;
     }
 }

@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface EducationRepository extends JpaRepository<Education, Long> {
     List<Education> findByResume(Resume resume);
+    void deleteAllByResume(Resume resume);
 }

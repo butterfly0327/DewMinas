@@ -25,12 +25,14 @@ public class ProjectSummary {
     private String shortComment;
     private String rep_photo_url;
     private List<String> token_url;
+    private String owner;
 
     public ProjectSummary(Project original) {
         this.id = original.getId();
         this.title = original.getTitle();
         this.shortComment = original.getShortComment();
         this.rep_photo_url = original.getRepImage() != null ? original.getRepImage().getUrl() : null;
+        this.owner = original.getOwner();
 
         if(original.getSkills() == null) return;
         this.token_url = new ArrayList<>();

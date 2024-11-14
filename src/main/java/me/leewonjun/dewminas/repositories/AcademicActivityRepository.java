@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface AcademicActivityRepository extends JpaRepository<AcademicActivity, Long> {
     public List<AcademicActivity> findByResume(Resume resume);
+    void deleteAllByResume(Resume resume);
 }

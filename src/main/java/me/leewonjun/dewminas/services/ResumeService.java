@@ -46,6 +46,8 @@ public class ResumeService {
     @Autowired
     private final WorkExpRepository workExpRepository;
 
+    @Autowired
+    private final ProjectRepository projectRepository;
 
     public String getOwnerEmailById(Long resume_id) {
         return resumeRepository.findById(resume_id).orElseThrow(()->new IllegalArgumentException("Resume id '"+resume_id+"' does not exist.")).getOwner().getEmail();
@@ -116,5 +118,22 @@ public class ResumeService {
         // 현재 엔티티 테이블에서 현재 이력서를 참조하는 모든 엔티티의 id값을 set으로 불러온다.
         allKeys.removeAll(existEntities.keySet());
         repository.deleteAllByIdInBatch(allKeys);
+    }
+
+    @Transactional
+    public void deleteResume(String email) {
+        User owner = userRepository.findByEmail(email).orElseThrow(()->new IllegalArgumentException("deleteResume : "+ email + " does not exist."));
+        Resume resume = resumeRepository.findByOwner(owner).orElseThrow(()->new UnsupportedOperationException("deleteResume : "+ email + " didn't register any resumes"));
+
+        academicActivityRepository.deleteAllByResume(resume);
+        awardRepository.deleteAllByResume(resume);
+        educationRepository.deleteAllByResume(resume);
+        educationalExpRepository.deleteAllByResume(resume);
+        licenseRepository.deleteAllByResume(resume);
+        workExpRepository.deleteAllByResume(resume);
+
+        List<Project> projects = projectRepository.findAllByResume(resume);
+        for(Project project : projects) project.setResume(null);
+        resumeRepository.deleteById(resume.getId());
     }
 }
