@@ -6,3 +6,5 @@
 
 server : springboot3, java, thymeleaf
 client : js(vanilla), html, css
+
+![1728717394611](https://github.com/user-attachments/assets/4e306f1f-fe81-445a-afae-329099641ebb)
