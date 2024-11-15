@@ -1,3 +1,4 @@
+![1728717394611](https://github.com/user-attachments/assets/4e306f1f-fe81-445a-afae-329099641ebb)
 # DewMinas
 이력서 템플릿 공유 웹 사이트 듀미나스(DewMinas)
 
@@ -6,5 +7,3 @@
 
 server : springboot3, java, thymeleaf
 client : js(vanilla), html, css
-
-![1728717394611](https://github.com/user-attachments/assets/4e306f1f-fe81-445a-afae-329099641ebb)
