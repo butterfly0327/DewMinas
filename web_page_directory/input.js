@@ -177,12 +177,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // 미리보기 버튼 클릭 이벤트
   previewButton.addEventListener('click', function () {
     const allData = {
-      educationList: [],
-      awardList: [],
-      eduExpList: [],
-      acaActList: [],
-      workExpList: [],
-      licenseList: [],
+      educations: [],
+      awards: [],
+      eduExps: [],
+      academicActivities: [],
+      workExps: [],
+      licenses: [],
       desiredPosition: "" // desiredPosition 추가
     };
 

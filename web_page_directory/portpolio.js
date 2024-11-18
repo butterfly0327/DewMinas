@@ -1,7 +1,7 @@
 const allData = JSON.parse(localStorage.getItem('formData'));  // 저장된 데이터 가져오기
 
 document.addEventListener("DOMContentLoaded", function() {
-
+    console.log(allData)
     // 데이터가 없으면 바로 종료
     if (!allData) return;
 
