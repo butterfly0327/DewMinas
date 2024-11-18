@@ -1,12 +1,11 @@
-package me.leewonjun.dewminas.dto;
+package me.leewonjun.dewminas.dto.client_dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.*;
-import me.leewonjun.dewminas.dto.resume_summaries.*;
+import me.leewonjun.dewminas.dto.resume_sub.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

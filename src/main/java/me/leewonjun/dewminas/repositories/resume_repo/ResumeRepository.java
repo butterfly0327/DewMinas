@@ -1,12 +1,10 @@
-package me.leewonjun.dewminas.repositories;
+package me.leewonjun.dewminas.repositories.resume_repo;
 
-import lombok.RequiredArgsConstructor;
 import me.leewonjun.dewminas.domains.Resume;
 import me.leewonjun.dewminas.domains.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Repository

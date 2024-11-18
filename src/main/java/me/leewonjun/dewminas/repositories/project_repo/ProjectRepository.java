@@ -1,4 +1,4 @@
-package me.leewonjun.dewminas.repositories;
+package me.leewonjun.dewminas.repositories.project_repo;
 
 import me.leewonjun.dewminas.domains.Project;
 import me.leewonjun.dewminas.domains.Resume;

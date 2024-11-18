@@ -1,11 +1,10 @@
-package me.leewonjun.dewminas.dto;
+package me.leewonjun.dewminas.dto.client_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.leewonjun.dewminas.domains.WorkExp;
-import me.leewonjun.dewminas.dto.resume_summaries.*;
+import me.leewonjun.dewminas.dto.resume_sub.*;
 
 import java.util.List;
 

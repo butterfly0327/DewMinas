@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.leewonjun.dewminas.dto.resume_summaries.AwardSummary;
-import me.leewonjun.dewminas.dto.resume_summaries.Specifiable;
+import me.leewonjun.dewminas.dto.resume_sub.AwardSummary;
 
 import java.time.LocalDateTime;
 

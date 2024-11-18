@@ -1,4 +1,4 @@
-package me.leewonjun.dewminas.dto;
+package me.leewonjun.dewminas.dto.resume_sub;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import me.leewonjun.dewminas.domains.Project;
 import me.leewonjun.dewminas.domains.Skill;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

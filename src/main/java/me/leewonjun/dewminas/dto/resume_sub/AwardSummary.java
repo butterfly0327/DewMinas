@@ -1,4 +1,4 @@
-package me.leewonjun.dewminas.dto.resume_summaries;
+package me.leewonjun.dewminas.dto.resume_sub;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 import me.leewonjun.dewminas.domains.Award;
 import me.leewonjun.dewminas.domains.Updatable;
 
-import javax.security.auth.callback.LanguageCallback;
 import java.time.LocalDateTime;
 
 @Getter

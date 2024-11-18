@@ -1,6 +1,5 @@
-package me.leewonjun.dewminas.repositories;
+package me.leewonjun.dewminas.repositories.resume_repo;
 
-import me.leewonjun.dewminas.domains.EducationalExp;
 import me.leewonjun.dewminas.domains.Resume;
 import me.leewonjun.dewminas.domains.WorkExp;
 import org.springframework.data.jpa.repository.JpaRepository;

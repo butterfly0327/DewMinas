@@ -1,4 +1,4 @@
-package me.leewonjun.dewminas.dto.resume_summaries;
+package me.leewonjun.dewminas.dto.resume_sub;
 
 import lombok.*;
 import me.leewonjun.dewminas.domains.Education;

@@ -3,10 +3,8 @@ package me.leewonjun.dewminas.domains;
 import jakarta.persistence.*;
 import lombok.*;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
-import me.leewonjun.dewminas.dto.resume_summaries.WorkExpSummary;
-import org.hibernate.jdbc.Work;
+import me.leewonjun.dewminas.dto.resume_sub.WorkExpSummary;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

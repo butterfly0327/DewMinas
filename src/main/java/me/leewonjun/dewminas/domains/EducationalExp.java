@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
-import me.leewonjun.dewminas.dto.resume_summaries.EducationalExpSummary;
-import me.leewonjun.dewminas.dto.resume_summaries.Specifiable;
+import me.leewonjun.dewminas.dto.resume_sub.EducationalExpSummary;
 
 import java.time.LocalDateTime;
 

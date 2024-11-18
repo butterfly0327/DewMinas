@@ -1,4 +1,4 @@
-package me.leewonjun.dewminas.repositories;
+package me.leewonjun.dewminas.repositories.project_repo;
 
 import me.leewonjun.dewminas.domains.ProjectSource;
 import me.leewonjun.dewminas.domains.compositekeys.OpenSourceLibsPk;
