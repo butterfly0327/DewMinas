@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
         introFrame.appendChild(fullName);
 
         const role = document.createElement("p");
-        role.classList.add("desiredPosition");
-        role.textContent = data.role && data.role[0] ? data.role[0] : "Software Engineer";
+        role.classList.add("role");
+        role.textContent = data.desiredPosition ? data.desiredPosition : "Software Engineer";
         introFrame.appendChild(role);
 
         const phoneNumber = document.createElement("p");
