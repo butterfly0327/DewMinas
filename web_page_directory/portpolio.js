@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
         introFrame.appendChild(fullName);
 
         const role = document.createElement("p");
-        role.classList.add("desiredPosition");
-        role.textContent = data.role && data.role[0] ? data.role[0] : "Software Engineer";
+        role.classList.add("role");
+        role.textContent = data.desiredPosition ? data.desiredPosition : "Software Engineer";
         introFrame.appendChild(role);
 
         const phoneNumber = document.createElement("p");
@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function createEducationSection(allData) {
-        // allData.educationList가 비어 있으면 함수 종료
-        if (!allData.educationList || allData.educationList.length === 0) return;
+        // allData.educations가 비어 있으면 함수 종료
+        if (!allData.educations || allData.educations.length === 0) return;
     
         // Education 섹션 컨테이너 생성
         const educationContainer = document.createElement("div");
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
         educationContainer.appendChild(title);
     
         // 각 교육 항목을 처리
-        allData.educationList.forEach((education, index) => {
+        allData.educations.forEach((education, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
     
@@ -77,11 +77,10 @@ document.addEventListener("DOMContentLoaded", function() {
             educationInfo.classList.add("content-1");
             educationInfo.textContent = `${education. institution_name || "대학교"} / ${education.department || "컴퓨터공학과"} / ${education.degree || "학사"}`;
             contentFrame.appendChild(educationInfo);
-            // GPA 정보 생성
-            const ty = document.createElement("p");
-            ty.classList.add("content-1");
-            ty.textContent = `${education.to_now === "1" ? "재학중" : "졸업"}`;
-            contentFrame.appendChild(ty);
+
+            
+            
+
             // GPA 정보 생성
             const gpa = document.createElement("p");
             gpa.classList.add("content-2");
@@ -94,8 +93,14 @@ document.addEventListener("DOMContentLoaded", function() {
             const date = document.createElement("p");
             date.classList.add("content-2")
             date.textContent = `${education.from_date || "2000.10.15"} ~ ${education.to_now === "1" ? new Date().toLocaleDateString() : education.to_date || "2000.10.15"}`;
+            
+            const ty = document.createElement("p");
+            ty.classList.add("content-2");
+            ty.textContent = `${education.to_now === "1" ? "재학중" : "졸업"}`;
+            
             // 각 항목을 Education Container에 추가
             miniframe.appendChild(date);
+            miniframe.appendChild(ty);
             contentFrame.appendChild(miniframe);
             educationContainer.appendChild(contentFrame);
 
@@ -106,8 +111,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     function createLicenseSection(allData) {
-        // allData.licenseList가 비어 있으면 함수 종료
-        if (!allData.licenseList || allData.licenseList.length === 0) return;
+        // allData.licenses가 비어 있으면 함수 종료
+        if (!allData.licenses || allData.licenses.length === 0) return;
         
         // License 섹션 컨테이너 생성
         const licenseContainer = document.createElement("div");
@@ -121,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
         licenseContainer.appendChild(title);
     
         // 각 라이센스 항목을 처리
-        allData.licenseList.forEach((license, index) => {
+        allData.licenses.forEach((license, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
     
@@ -164,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Awards 섹션 생성
     function createAwardsSection(data) {
         // 만약 data.awards.name이 비어 있으면 함수를 종료
-        if (!data.awardList || data.awardList.length === 0) return;
+        if (!data.awards || data.awards.length === 0) return;
 
         const awardsContainer = document.createElement("div");
         awardsContainer.classList.add("content-container");
@@ -175,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
         title.textContent = "/ Awards /";
         awardsContainer.appendChild(title);
 
-        data.awardList.forEach((award, index) => {
+        data.awards.forEach((award, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
 
@@ -216,8 +221,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Experience 섹션 생성
 function createExperienceSection(data) {
-    // 만약 data.eduExpList가 비어 있으면 함수를 종료
-    if (!data.eduExpList || data.eduExpList.length === 0) return;
+    // 만약 data.eduExps가 비어 있으면 함수를 종료
+    if (!data.eduExps || data.eduExps.length === 0) return;
 
     const experienceContainer = document.createElement("div");
     experienceContainer.classList.add("content-container");
@@ -229,7 +234,7 @@ function createExperienceSection(data) {
     experienceContainer.appendChild(title);
 
     // 각 경험 항목을 처리
-    data.eduExpList.forEach((experience) => {
+    data.eduExps.forEach((experience) => {
         const contentFrame = document.createElement("div");
         contentFrame.classList.add("content-frame");
 
@@ -278,10 +283,10 @@ function createExperienceSection(data) {
     portfolioContainer.appendChild(experienceContainer);
 }
 
-// acaActList 섹션 생성
+// academicActivities 섹션 생성
 function createAcaActSection(data) {
-    // 만약 data.acaActList가 비어 있으면 함수를 종료
-    if (!data.acaActList || data.acaActList.length === 0) return;
+    // 만약 data.academicActivities가 비어 있으면 함수를 종료
+    if (!data.academicActivities || data.academicActivities.length === 0) return;
 
     const acaActContainer = document.createElement("div");
     acaActContainer.classList.add("content-container");
@@ -293,7 +298,7 @@ function createAcaActSection(data) {
     acaActContainer.appendChild(title);
 
     // 각 활동 항목을 처리
-    data.acaActList.forEach((activity) => {
+    data.academicActivities.forEach((activity) => {
         const contentFrame = document.createElement("div");
         contentFrame.classList.add("content-frame");
 
@@ -346,7 +351,7 @@ function createAcaActSection(data) {
 
 
     function createWorkExperienceSection(data) {
-        if (!data.workExpList || data.workExpList.length === 0) return;
+        if (!data.workExps || data.workExps.length === 0) return;
 
         const workExperienceContainer = document.createElement("div");
         workExperienceContainer.classList.add("content-container");
@@ -357,7 +362,7 @@ function createAcaActSection(data) {
         title.textContent = "/ Work Experience /";
         workExperienceContainer.appendChild(title);
     
-        data.workExpList.forEach((workExp, index) => {
+        data.workExps.forEach((workExp, index) => {
             const contentFrame = document.createElement("div");
             contentFrame.classList.add("content-frame");
         
@@ -368,7 +373,7 @@ function createAcaActSection(data) {
             contentFrame.appendChild(bulletPoint);
 
              // 마지막 항목이 아니면 timeline 추가
-    if (index !== data.workExpList.length - 1) {
+    if (index !== data.workExps.length - 1) {
         const timeline = document.createElement("div");
         timeline.classList.add("timeline");
         contentFrame.appendChild(timeline);

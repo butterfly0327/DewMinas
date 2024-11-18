@@ -34,7 +34,7 @@
           </div>
           <div class="background-border">
             <div class="background-border-3">
-              <p class="div-3"><span class="text-wrapper-4">간단한 자기 소개</span> </p>
+              <p class="div-3"><span class="text-wrapper-4">희망 직무 설명</span> </p>
               <textarea class="text_area_1" name="desiredPosition" placeholder="software enginear"></textarea>
             </div>
             <div class="border">
@@ -51,7 +51,7 @@
             <div class="container-9">
               <div class="label-12">
                 <div class="text-wrapper-18">고등학교 미만 졸업</div>
-                <input class="check" type="checkbox"  name="educationList[0].type">
+                <input class="check" type="checkbox"  name="educations[0].type">
               </div>
             </div>
           </div>
@@ -63,49 +63,49 @@
               <!-- Institution Name -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">대학교</span></p>
-                <input class="text_area" name="educationList[0].institution_name" placeholder="동의대학교" required>
+                <input class="text_area" name="educations[0].institution_name" placeholder="동의대학교" required>
               </div>
             
               <!-- Department -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">학과</span></p>
-                <input class="text_area" name="educationList[0].department" placeholder="컴퓨터공학과" required>
+                <input class="text_area" name="educations[0].department" placeholder="컴퓨터공학과" required>
               </div>
             
               <!-- Degree -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">학위</span></p>
-                <input class="text_area" name="educationList[0].degree" placeholder="학사">
+                <input class="text_area" name="educations[0].degree" placeholder="학사">
               </div>
             
               <!-- GPA -->
               <div class="e_frame_gpa">
                 <p class="div-3"><span class="text-wrapper-4">GPA</span></p>
-                <input class="text_area" name="educationList[0].gpa" placeholder="4.49">
+                <input class="text_area" name="educations[0].gpa" placeholder="4.49">
               </div>
             
               <!-- Max GPA -->
               <div class="e_frame_gpa">
                 <p class="div-3"><span class="text-wrapper-4">최대 GPA</span></p>
-                <input class="text_area" name="educationList[0].max_gpa" placeholder="4.5">
+                <input class="text_area" name="educations[0].max_gpa" placeholder="4.5">
               </div>
             
               <!-- From Date -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">시작 날짜</span></p>
-                <input class="text_area" type="date" name="educationList[0].from_Date" required>
+                <input class="text_area" type="date" name="educations[0].from_Date" required>
               </div>
             
               <!-- To Date -->
               <div class="e_frame">
                 <p class="div-3"><span class="text-wrapper-4">종료 날짜</span></p>
-                <input class="text_area" type="date" name="educationList[0].to_date" required>
+                <input class="text_area" type="date" name="educations[0].to_date" required>
               </div>
             
               <!-- To Now (Current Enrollment) -->
               <div class="e_frame">
                 <span class="e_checklist">현재 재학 중</span>
-                <input class="e_check" type="checkbox"  name="educationList[0].to_now" >
+                <input class="e_check" type="checkbox"  name="educations[0].to_now" >
               </div>
             </div>
             
@@ -123,15 +123,15 @@
             <div class="subframe">
               <div class="l_frame_1">
                   <p class="div-3"><span class="text-wrapper-4">자격증 명</span></p>
-                  <input class="text_area" name="licenseList[0].name" placeholder="정보처리기사">
+                  <input class="text_area" name="license[0].name" placeholder="정보처리기사">
               </div>
               <div class="l_frame_2">
                 <p class="div-3"><span class="text-wrapper-4">발행처</span></p>
-                  <input class="text_area" name="licenseList[0].organization_name" placeholder="국립국어원">
+                  <input class="text_area" name="license[0].organization_name" placeholder="국립국어원">
               </div>
               <div class="date">
                 <p class="div-3"><span class="text-wrapper-4">취득일</span></p>
-                <input class="text_area" name="licenseList[0].issued_data" placeholder="2024/20/10" type="date">
+                <input class="text_area" name="license[0].issued_data" placeholder="2024/20/10" type="date">
               </div>
               <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
             </div>
@@ -150,19 +150,19 @@
               <div class="image-wrapper"><img class="image-5" src="img/image-27.png" /></div>
               <div class="r_frame">
                 <p class="div-3"><span class="text-wrapper-4">수상명</span></p>
-                <input class="text_area" name="awardList[0].award_name" placeholder="지역상">
+                <input class="text_area" name="awards[0].award_name" placeholder="지역상">
               </div>
               <div class="r_frame">
                 <p class="div-3"><span class="text-wrapper-4">대회명</span></p>
-                <input class="text_area" name="awardList[0].competition_name" placeholder="전국 컴퓨터 경진대회">
+                <input class="text_area" name="awards[0].competition_name" placeholder="전국 컴퓨터 경진대회">
               </div>
               <div class="r_frame">
                 <p class="div-3"><span class="text-wrapper-4">수여기관</span></p>
-                <input class="text_area" name="awardList[0].organization_name" placeholder="동의대학교">
+                <input class="text_area" name="awards[0].organization_name" placeholder="동의대학교">
               </div>
               <div class="date">
                 <p class="div-3"><span class="text-wrapper-4">수상일</span></p>
-                <input class="text_area" name="awardList[0].award_date" placeholder="2024-04-04" type="date">
+                <input class="text_area" name="awards[0].award_date" placeholder="2024-04-04" type="date">
               </div>
             </div>
           </div>
@@ -183,24 +183,24 @@
               </div>
               <div class="x_frame">
                   <p class="div-3"><span class="text-wrapper-4">교육명</span></p>
-                  <input class="text_area" name="eduExpList[0].education_name" placeholder="지역 발전 사회화 교육">
+                  <input class="text_area" name="eduExps[0].education_name" placeholder="지역 발전 사회화 교육">
               </div>
               <div class="x_frame_1">
                   <p class="div-3"><span class="text-wrapper-4">교육기관</span></p>
-                  <input class="text_area" name="eduExpList[0].organization_name" placeholder="부산시">
+                  <input class="text_area" name="eduExps[0].organization_name" placeholder="부산시">
               </div>
               <div class="x_frame_1">
                       <p class="div-3"><span class="text-wrapper-4">시작년월</span></p>
-                      <input class="text_area" name="eduExpList[0].from_date" placeholder="2024/6" type="month">
+                      <input class="text_area" name="eduExps[0].from_date" placeholder="2024/6" type="month">
                   
               </div>
               <div class="x_frame_1">
                       <p class="div-3"><span class="text-wrapper-4">종료년월</span></p>
-                      <input class="text_area" name="eduExpList[0].to_date" placeholder="2024/8" type="month">
+                      <input class="text_area" name="eduExps[0].to_date" placeholder="2024/8" type="month">
               </div>
               <div class="e_frame">
                 <span class="e_checklist">현재 진행 중</span>
-                <input class="e_check" type="checkbox"  name="eduExpList[0].to_now" value="1">
+                <input class="e_check" type="checkbox"  name="eduExps[0].to_now" value="1">
               </div>
           </div>
           
@@ -223,19 +223,19 @@
               </div>
               <div class="x_frame">
                   <p class="div-3"><span class="text-wrapper-4">제목</span></p>
-                  <input class="text_area" name="acaActList[0].education_name" placeholder="지역 발전 사회화 논문">
+                  <input class="text_area" name="academicActivities[0].education_name" placeholder="지역 발전 사회화 논문">
               </div>
               <div class="x_frame_1">
                   <p class="div-3"><span class="text-wrapper-4">학술기관</span></p>
-                  <input class="text_area" name="acaActList[0].academic_institution" placeholder="부산시">
+                  <input class="text_area" name="academicActivities[0].academic_institution" placeholder="부산시">
               </div>
               <div class="x_frame_1">
                 <p class="div-3"><span class="text-wrapper-4">컨퍼런스 이름</span></p>
-                <input class="text_area" name="acaActList[0].conferenace_name" placeholder="컨퍼런스">
+                <input class="text_area" name="academicActivities[0].conferenace_name" placeholder="컨퍼런스">
             </div>
               <div class="x_frame_1">
                       <p class="div-3"><span class="text-wrapper-4">제출일</span></p>
-                      <input class="text_area" name="acaActList[0].activity_date" placeholder="2024/8/1" type="month">
+                      <input class="text_area" name="academicActivities[0].activity_date" placeholder="2024/8/1" type="month">
               </div>
           </div>
           
@@ -264,30 +264,30 @@
             <!-- 직급 -->
             <div class="c_frame">
                 <p class="div-3"><span class="text-wrapper-4">직급/직책</span></p>
-                <input class="text_area" name="workExpList[0].job_title" placeholder="과장 4호봉/영업본부장">
+                <input class="text_area" name="workExps[0].job_title" placeholder="과장 4호봉/영업본부장">
             </div>
             
             <!-- 회사명 -->
             <div class="c_frame">
                 <p class="div-3"><span class="text-wrapper-4">회사명</span></p>
-                <input class="text_area" name="workExpList[0].company_name" placeholder="동의제약">
+                <input class="text_area" name="workExps[0].company_name" placeholder="동의제약">
             </div>
             
             <!-- 입사 및 퇴사 년월 -->
             <div class="c_frame_1">
                 <div class="background-border-9">
                     <p class="div-3"><span class="text-wrapper-4">입사년월</span></p>
-                    <input class="text_area" name="workExpList[0].from_date" placeholder="2024" type="month">
+                    <input class="text_area" name="workExps[0].from_date" placeholder="2024" type="month">
                 </div>
                 
                 <div class="background-border-10">
                     <p class="div-3"><span class="text-wrapper-4">퇴사년월</span></p>
-                    <input class="text_area" name="workExpList[0].to_date" placeholder="2044" type="month">
+                    <input class="text_area" name="workExps[0].to_date" placeholder="2044" type="month">
                 </div>
             </div>
             <div class="c_frame_2">
                 <p class="div-3"><span class="text-wrapper-4">담당 업무</span></p>
-                <textarea class="text_area_1" name="workExpList[0].responsibilities" placeholder="내가 무엇을 담당했는지 설명해주세요"></textarea>
+                <textarea class="text_area_1" name="workExps[0].responsibilities" placeholder="내가 무엇을 담당했는지 설명해주세요"></textarea>
             </div>
 
 
