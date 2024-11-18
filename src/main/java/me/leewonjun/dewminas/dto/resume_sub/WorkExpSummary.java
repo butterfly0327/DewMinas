@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.leewonjun.dewminas.domains.Updatable;
-import me.leewonjun.dewminas.domains.WorkExp;
+import me.leewonjun.dewminas.domains.of_resume.WorkExp;
 
 import java.time.LocalDateTime;
 

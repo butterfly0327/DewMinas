@@ -3,6 +3,7 @@ package me.leewonjun.dewminas;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import me.leewonjun.dewminas.domains.*;
+import me.leewonjun.dewminas.domains.of_resume.*;
 import me.leewonjun.dewminas.dto.client_dto.RegisterResumeRequest;
 import me.leewonjun.dewminas.dto.client_dto.UpdateResumeRequest;
 import me.leewonjun.dewminas.dto.resume_sub.*;

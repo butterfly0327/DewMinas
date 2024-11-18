@@ -1,6 +1,8 @@
 package me.leewonjun.dewminas.controllers;
 
 import lombok.RequiredArgsConstructor;
+import me.leewonjun.dewminas.services.ProejctService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 public class ProjectApiController {
+
+    @Autowired
+    private final ProejctService proejctService;
 
     @GetMapping("/api/project/{id}")
     public ResponseEntity findProject(@PathVariable("id") Long projectId) {

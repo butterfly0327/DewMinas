@@ -1,7 +1,7 @@
 package me.leewonjun.dewminas.controllers;
 
 import lombok.RequiredArgsConstructor;
-import me.leewonjun.dewminas.domains.Resume;
+import me.leewonjun.dewminas.domains.of_resume.Resume;
 import me.leewonjun.dewminas.dto.client_dto.RegisterResumeRequest;
 import me.leewonjun.dewminas.dto.client_dto.ResumeResponse;
 import me.leewonjun.dewminas.dto.client_dto.UpdateResumeRequest;

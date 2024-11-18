@@ -1,7 +1,7 @@
 package me.leewonjun.dewminas.dto.resume_sub;
 
 import lombok.*;
-import me.leewonjun.dewminas.domains.Education;
+import me.leewonjun.dewminas.domains.of_resume.Education;
 import me.leewonjun.dewminas.domains.Updatable;
 
 import java.time.LocalDateTime;

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.leewonjun.dewminas.domains.of_resume.Resume;
 import me.leewonjun.dewminas.domains.sectiondatefields.CommonDateField;
 
 import java.util.ArrayList;
