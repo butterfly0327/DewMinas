@@ -1,9 +1,13 @@
 package me.leewonjun.dewminas.domains;
 
 import me.leewonjun.dewminas.domains.of_resume.Resume;
+import me.leewonjun.dewminas.dto.resume_sub.Specifiable;
 
-public interface Updatable<T> extends Contrastable {
-    public abstract boolean updateData(T summary);
-    public abstract Long getId();
-    public abstract void setResume(Resume resume);
+public interface Updatable<T extends Specifiable> extends Contrastable {
+    boolean updateData(T summary);
+    // Lombok @Getter에 의해 오버라이딩
+    Long getId();
+    default void setResume(Resume resume) {
+        throw new UnsupportedOperationException("Updatable : setResume() - only for resume sub elements");
+    }
 }
