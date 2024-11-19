@@ -263,7 +263,17 @@ function beforeUnloadHandler(event) {
 
 document.addEventListener('click', function(event) {
   const wrapper = event.target.closest('.image-wrapper');
+
   if (wrapper && wrapper.parentElement) {
+    const section = wrapper.getAttribute('data-section');
+
+    if (section) {
+      const fieldCountKey = `fieldCount-${section}`;
+      const currentCount = parseInt(localStorage.getItem(fieldCountKey)) || 0;
+      if (currentCount > 0) {
+        localStorage.setItem(fieldCountKey, currentCount - 1);
+      }
+    }
     wrapper.parentElement.remove();
   }
 });
