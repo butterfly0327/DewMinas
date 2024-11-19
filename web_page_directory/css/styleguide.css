@@ -10,14 +10,15 @@
   --project-title:#FFF;
   --poject-border:#FFF;
   --project-tborder:linear-gradient(180deg, #003CB4 0%, #002060 61%, #002060 100%);
-  --profile-background:linear-gradient(180deg, #EDE7F6 54.15%, #FBF8FF 100%);
 
+
+  --profile-background:linear-gradient(180deg, #EDE7F6 54.15%, #FBF8FF 100%);
   --profile-head-background:#F582FB;
-  --profile-head-color: #000;
-  --profile-head-font-size: 24px;
+  --profile-head-font-color: #000;
+  --profile-head-font-size: 20px;
   --profile-head-font-style: normal;
   --profile-head-font-font-weight: 900;
-  --profile-head-font-line-height: 20px; /* 100% */
+  --profile-head-font-line-height: 56px; /* 100% */
 
 
 
